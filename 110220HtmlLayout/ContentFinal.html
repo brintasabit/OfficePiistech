@@ -1,8 +1,40 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+           $('#lnkdashboard').click(function(){
+               Show();
+           });
+            alert('Successfull!')
+        });
+    var Show=function(){
+        $.ajax({
+            url: 'https://brintas.webs.com/us',
+            type: 'POST',
+            // // data: formData,
+            // dataType: 'json',
+            // contentType: 'application/json; charset=utf-8',
+            error: function (xhr) {
+                alert('Error: ' + xhr.statusText);
+            },
+            success: function (result) {
+                alert('Success');
+            },
+            async: true,
+            processData: false
+        });
+    }
+    </script>
+
+
 <!DOCTYPE html>
 <html>
 
 
 <head>
+    
+
+
+
 <link href="https://fonts.googleapis.com/css?family=Merriweather&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -123,8 +155,10 @@
     <p>This is Content</p>
 </div>
 <div class="sidenav">
-    <a href=""><i class="material-icons">dashboard</i>Dashboard</a>
+    <div>
+    <a id="lnkdashboard"><i class="material-icons">dashboard</i>Dashboard</a>
     <a href=""><i class="material-icons">face</i>Employee</a>
+    </div>
 </div>
 <div class="footer">
     <p>Footer</p>
