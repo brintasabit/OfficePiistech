@@ -1,0 +1,151 @@
+﻿    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    
+    <script src="~/Scripts/Scripts.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Merriweather&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Information</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            text-decoration: none;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 80px;
+            position: fixed;
+            display: block;
+            background-color: #b40a3d;
+            font-family: 'Merriweather', serif;
+        }
+
+        .logo-container {
+            height: 100%;
+            display: table;
+            float: left;
+        }
+
+            .logo-container h1 {
+                height: 100%;
+                color: #000000;
+                display: table-cell;
+                vertical-align: middle;
+                font-family: 'Merriweather', serif;
+            }
+
+        .navigation {
+            float: right;
+            height: 100%;
+        }
+
+            .navigation a {
+                height: 100%;
+                display: table;
+                float: left;
+                padding: 0px 20px;
+            }
+
+                .navigation a:last-child {
+                    padding-right: 0;
+                }
+
+                .navigation a li {
+                    display: table-cell;
+                    vertical-align: middle;
+                    height: 100%;
+                    font-family: 'Merriweather', serif;
+                }
+
+        .mainsection {
+            position: absolute;
+            float: left;
+            width: 70%;
+            background-color: #fffdfd;
+            height: 100px;
+            text-align: center;
+            display: inline-block;
+            font-family: 'Merriweather', serif;
+            color: #a80e0e;
+            left: 20%;
+            top: 20%;
+        }
+
+        .sidenav {
+            height: 100%;
+            width: 160px;
+            position: fixed;
+            z-index: 1;
+            top: 80px;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            padding-top: 16px;
+            font-family: 'Merriweather', serif;
+        }
+
+            .sidenav a {
+                padding: 6px 8px 6px 16px;
+                text-decoration: none;
+                font-size: 20px;
+                color: #818181;
+                display: block;
+            }
+
+        .footer {
+            position: fixed;
+            width: 100%;
+            left: 0;
+            bottom: 0;
+            background-color: #bd0d42;
+            font-family: 'Times New Roman', Times, serif;
+            color: white;
+            text-align: center;
+        }
+    </style>
+
+
+    <div class="header">
+        <div class="logo-container">
+            <h1>Piis<span>Tech</span></h1>
+        </div>
+        <ul class="navigation">
+            <a href=""><li><i class="material-icons">home</i></li></a>
+            <a><li>Register</li></a>
+            <a><li>LogIn</li></a>
+        </ul>
+    </div>
+    <div id="content" class="mainsection">
+
+
+    </div>
+    <div class="sidenav">
+        <div>
+            <a id="lnkdashboard"><i class="material-icons">dashboard</i>Dashboard</a>
+            <a id="employee"><i class="material-icons">face</i>Employee</a>
+            <a id="edit"><i class="material-icons">functions</i>Edit</a>
+            <a id="delete"><i class="material-icons">delete</i>Delete</a>
+            <a id="logout"><i class="material-icons">face</i>Logout</a>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <div class="footer">
+            <p>&copy; @DateTime.Now.Year - PIISTECH</p>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
