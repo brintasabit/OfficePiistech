@@ -1,0 +1,93 @@
+﻿
+@{
+    ViewBag.Title = "AddOrEdit";
+    Layout = null;
+}
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+<link href="https://fonts.googleapis.com/css?family=Sriracha&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        text-decoration: none;
+    }
+    #content2.mainsection {
+        position: absolute;
+        height: 500px;
+        overflow: scroll;
+        width: 60%;
+        float: right;
+        display: inline-block;
+        font-family: 'Sriracha', cursive;
+        color: #000000;
+        left: 30%;
+        top: 15%
+    }
+    .w3-card-4 {
+        left: 10%;
+        top: 10%
+    }
+    .btn {
+        margin: 0;
+        float: right;
+    }
+
+</style>
+<meta name="viewport" content="width=device-width" />
+<title>AddOrEdit</title>
+<div id="content2" class="mainsection">
+
+    <div class="w3-container w3-black">
+        <h5>Add Employee</h5>
+        <div class="btn btn-info">Add</div>
+
+        <div id="card1" class="w3-card-4">
+            <div id="emploeeCard" class="w3-container">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="name" class="form-control" id="name" placeholder="Name">
+                </div>
+
+                <div class="form-group">
+                    <label for="age">Age</label>
+                    <input type="age" class="form-control" id="age" placeholder="Age">
+                </div>
+
+                <div class="form-group">
+                    <label for="office">Office</label>
+                    <input type="office" class="form-control" id="office" placeholder="Office">
+                </div>
+
+                <div class="form-group">
+                    <label for="position">Position</label>
+                    <input type="position" class="form-control" id="position" placeholder="Position">
+                </div>
+
+                <div class="form-group">
+                    <label for="salary">Salary</label>
+                    <input type="salary" class="form-control" id="salary" placeholder="Salary">
+                </div>
+
+                <div class="form-group">
+                    <label for="isCurrentEmployee">Is current employee ?</label>
+                    <input type="checkbox" class="form-control" id="isCurrentEmployee">
+                </div>
+
+                <div class="form-group">
+                    <label for="imagePath">ImagePath</label>
+                    <input type="hidden" class="form-control" id="imagePath">
+                </div>
+            </div>
+            <footer id="footercard2" class="w3-card-4">
+                <div id="add" class="btn btn-info">Add</div>
+            </footer>
+
+        </div>
+    </div>
+</div>
+
+
+

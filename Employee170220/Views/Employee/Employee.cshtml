@@ -1,0 +1,85 @@
+﻿
+@{
+    Layout = null;
+}
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        text-decoration: none;
+    }
+    .btn {
+        float: right;
+    }
+    .card {
+        position: center;
+        width: 70%;
+    }
+</style>
+<meta name="viewport" content="width=device-width" />
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+
+
+<link href="https://fonts.googleapis.com/css?family=Sriracha&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>*@
+<link href="/your-path-to-fontawesome/css/all.css" rel="stylesheet">
+<title>Employee</title>
+
+
+<div class="card">
+    <div class="card-header">
+        Employees Information
+        <button type="button" class="btn btn-success" id="addEmployee">@*<i class="material-icons">person_add</i>*@Add New</button>
+    </div>
+    <table class="table table-bordered" id="employeeTable">
+        <thead class="thead-dark">
+            <tr>
+                <th>Employee Id</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Office</th>
+                <th>Position</th>
+                <th>Salary</th>
+                <th>Is Current Employee</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>1</th>
+                <th>Alice</th>
+                <th>24</th>
+                <th>PiisTech</th>
+                <th>Developer</th>
+                <th>20000</th>
+                <th>Yes</th>
+            </tr>
+            </tbody>
+    </table>
+</div>
+
+
+
+@*<link href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+@section scripts
+{@Scripts.Render("~/bundles/jqueryval")
+<script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script>
+    function activatejQueryTable() {
+        $("#employeeTable").
+            DataTable();
+
+    }
+    $(function () {
+        activatejQueryTable();
+    });
+</script>
+}*@
+
+
