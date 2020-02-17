@@ -6,7 +6,7 @@
 });
 
 var Dashboard = function() {
-    $('#content').load('/Employee/Dashboard');
+    $('#main').load('/Employee/Dashboard');
     //$('#content2').load('/Employee/Dashboard');
     //$('#content3').load('/Employee/Dashboard');
 }

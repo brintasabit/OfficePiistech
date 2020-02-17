@@ -22,20 +22,20 @@
     #content.mainsection {
         position: absolute;
         height: 100px;
-        background-color: #00FFFF;
+        
         width: 20%;
         float: left;
-        display: inline-block;
+        display: block;
         font-family: 'Sriracha', cursive;
         color: #000000;
-        left: 15%;
+        left: 10%;
         top: 15%
     }
 
     #content2.mainsection {
         position: absolute;
-        height: 100px;
-        background-color: #00FFFF;
+        height: 60px;
+        
         width: 20%;
         float: left;
         display: inline-block;
@@ -48,14 +48,14 @@
     #content3.mainsection {
         position: absolute;
         height: 100px;
-        background-color: #00FFFF;
+        
         width: 20%;
         float: left;
-        display: inline-block;
+        display: block;
         font-family: 'Sriracha', cursive;
         color: #000000;
         left: 70%;
-        top: 13%
+        top: 15%
     }
 
     .btn {
@@ -67,7 +67,7 @@
         float: left;
     }
 
-    #w3-card-4 {
+    .w3-card-4 {
         left: 10%;
         top: 10%
     }
@@ -543,18 +543,22 @@
     }
 
     .main {
-        position: absolute;
+        position: fixed;
         height: 100px;
-        width: 20%;
+        width: 80%;
         float: left;
-        display: inline-block;
+        display: flex;
+        
         font-family: 'Sriracha', cursive;
         color: #000000;
         left: 13%;
-        top: 13%
+        top: 10%;
+        
     }
+
 </style>
 
+<div id="main" class="main">
 <div id="content" class="mainsection">
 
     <div class="w3-container w3-black">
@@ -631,4 +635,5 @@
         <dd class="percentage percentage-16"><span class="text">Age 26-28: 16.09%</span></dd>
         <dd class="percentage percentage-5"><span class="text">Age 30++: 5.41%</span></dd>
     </dl>
+</div>
 </div>
