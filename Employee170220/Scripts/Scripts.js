@@ -17,7 +17,6 @@
 
 
 var AddEmployee = function () {
-    alert('fire');
 	$('#main').load('/Employee/AddOrEdit');
 }
 var Home = function () {
