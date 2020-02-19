@@ -32,6 +32,11 @@
         right: 10px
 
     }
+    #IsCurrentEmployee.w3-input {
+        position: absolute;
+        left: 54%;
+        top: 67%;
+    }
 </style>
 
 
@@ -48,38 +53,42 @@
             <div class="col-md-6">
                 <div class="w3-half">
 
-                    <input class="w3-input w3-border" type="hidden" placeholder="employeeId">
+                    <input class="w3-input w3-border" type="hidden" placeholder="employeeId" id="EmployeeId">
                 </div>
                 <div class="w3-half">
                     <label>Name</label>
-                    <input class="w3-input w3-border" type="text" placeholder="Name">
+                    <input class="w3-input w3-border" type="text" placeholder="Name" id="Name">
                 </div>
                 <div class="w3-half">
                     <label>Age</label>
-                    <input class="w3-input w3-border" type="text" placeholder="Age">
+                    <input class="w3-input w3-border" type="text" placeholder="Age" id="Age">
                 </div>
                 <div class="w3-half">
                     <label>Office</label>
-                    <input class="w3-input w3-border" type="text" placeholder="Office">
+                    <input class="w3-input w3-border" type="text" placeholder="Office" id="Office">
                 </div>
                 <div class="w3-half">
                     <label>Position</label>
-                    <input class="w3-input w3-border" type="text" placeholder="Position">
+                    <input class="w3-input w3-border" type="text" placeholder="Position" id="Position">
                 </div>
                 <div class="w3-half">
                     <label>Salary</label>
-                    <input class="w3-input w3-border" type="text" placeholder="Salary">
+                    <input class="w3-input w3-border" type="text" placeholder="Salary" id="Salary">
+                </div>
+                <div class="w3-half">
+                    <label>Is Current Employee?</label>
+                    <input class="w3-input w3-border" type="checkbox" id="IsCurrentEmployee">
                 </div>
                 <div class="w3-half">
                     <div class="btnButton">
-                        <button type="button" id="button" class="btn btn-success"><i class="material-icons">person_add</i>Add</button>
+                        <button type="button" id="saveEmployee" class="btn btn-success"><i class="material-icons">person_add</i>Add</button>
                     </div>
                 </div>
             </div>
                 <div class="col-md-6">
                     <div class="w3-half">
                         <label>Profile Image</label>
-                        <input class="w3-input w3-border" type="hidden" placeholder="ImagePath">
+                        <input class="w3-input w3-border" type="hidden" placeholder="ImagePath" id="ImagePath">
                     </div>
                 </div>
                 </div>

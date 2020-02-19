@@ -7,6 +7,9 @@
     });
 	$('#button').click(function () {
 		AddEmployee();
+    });
+	$('#saveEmployee').click(function () {
+		AddOrEditEmployee();
 	});
 });
 
@@ -18,4 +21,16 @@ var Employee = function() {
 }
 var AddEmployee = function () {
 	$('#main').load('/employee/addoredit');
+}
+var AddOrEditEmployee = function() {
+	var requestData = {
+		EmployeeId: $('#EmployeeId').val(),
+        Name: $('#Name').val(),
+        Age:$('#Age').val(),
+		Office: $('#Office').val(),
+		Position: $('#Position').val(),
+        Salary: $('#Salary').val(),
+        IsCurrentEmployee: $('#IsCurrentEmployee').val(),
+		ImagePath: $('#ImagePath').val()
+	};
 }
