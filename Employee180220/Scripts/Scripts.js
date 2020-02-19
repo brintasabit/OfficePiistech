@@ -83,8 +83,8 @@ function Edit(url) {
 	$.ajax({
 		type: 'GET',
 		url: url,
-		success: function (result) {
-			alert('Updated!');
+		success: function (response) {
+alert('Updated');
 		},
 		async: true,
 		processData: false

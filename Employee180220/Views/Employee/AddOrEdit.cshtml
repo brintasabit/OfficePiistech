@@ -44,57 +44,59 @@
     @Scripts.Render("~/bundles/modernizr")*@
 <meta name="viewport" content="width=device-width" />
 <title>Add Or Edit Employee</title>
-<div class="w3-card-4">
-    <header class="w3-container w3-black">
-        <h1>Employee Details</h1>
-    </header>
-    <div id="w3-container" class="w3-container">
-        @Html.HiddenFor(model => model.EmployeeId)
-        <div class="w3-row-padding">
+<div id="addOrEdit">
+    <div class="w3-card-4">
+        <header class="w3-container w3-black">
+            <h1>Employee Details</h1>
+        </header>
+        <div id="w3-container" class="w3-container">
+            @Html.HiddenFor(model => model.EmployeeId)
+            <div class="w3-row-padding">
 
-            <div class="col-md-6">
-                <div class="w3-half">
+                <div class="col-md-6">
+                    <div class="w3-half">
 
-                    <input class="w3-input w3-border" type="hidden" placeholder="employeeId" id="EmployeeId">
+                        <input class="w3-input w3-border" type="hidden" placeholder="employeeId" id="EmployeeId">
+                    </div>
+                    <div class="w3-half">
+                        <label>Name</label>
+                        <input class="w3-input w3-border" type="text" placeholder="Name" id="Name">
+                    </div>
+                    <div class="w3-half">
+                        <label>Age</label>
+                        <input class="w3-input w3-border" type="text" placeholder="Age" id="Age">
+                    </div>
+                    <div class="w3-half">
+                        <label>Office</label>
+                        <input class="w3-input w3-border" type="text" placeholder="Office" id="Office">
+                    </div>
+                    <div class="w3-half">
+                        <label>Position</label>
+                        <input class="w3-input w3-border" type="text" placeholder="Position" id="Position">
+                    </div>
+                    <div class="w3-half">
+                        <label>Salary</label>
+                        <input class="w3-input w3-border" type="text" placeholder="Salary" id="Salary">
+                    </div>
+                    <div class="w3-half">
+                        <label>Is Current Employee?</label>
+                        <input class="w3-input w3-border" type="checkbox" id="IsCurrentEmployee">
+                    </div>
+                    <div id="saveEmp" class="w3-half">
+                        <div class="btnButton">
+                            <button type="button" class="btn btn-success"><i class="material-icons">person_add</i>Add</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="w3-half">
-                    <label>Name</label>
-                    <input class="w3-input w3-border" type="text" placeholder="Name" id="Name">
-                </div>
-                <div class="w3-half">
-                    <label>Age</label>
-                    <input class="w3-input w3-border" type="text" placeholder="Age" id="Age">
-                </div>
-                <div class="w3-half">
-                    <label>Office</label>
-                    <input class="w3-input w3-border" type="text" placeholder="Office" id="Office">
-                </div>
-                <div class="w3-half">
-                    <label>Position</label>
-                    <input class="w3-input w3-border" type="text" placeholder="Position" id="Position">
-                </div>
-                <div class="w3-half">
-                    <label>Salary</label>
-                    <input class="w3-input w3-border" type="text" placeholder="Salary" id="Salary">
-                </div>
-                <div class="w3-half">
-                    <label>Is Current Employee?</label>
-                    <input class="w3-input w3-border" type="checkbox" id="IsCurrentEmployee">
-                </div>
-                <div id="saveEmp" class="w3-half">
-                    <div class="btnButton">
-                        <button type="button" class="btn btn-success"><i class="material-icons">person_add</i>Add</button>
+                <div class="col-md-6">
+                    <div class="w3-half">
+                        <label>Profile Image</label>
+                        <input class="w3-input w3-border" type="hidden" placeholder="ImagePath" id="ImagePath">
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="w3-half">
-                    <label>Profile Image</label>
-                    <input class="w3-input w3-border" type="hidden" placeholder="ImagePath" id="ImagePath">
-                </div>
-            </div>
+
         </div>
 
     </div>
-    
 </div>
