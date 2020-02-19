@@ -5,23 +5,23 @@
 }
 
     <meta name="viewport" content="width=device-width" />
-    <title>Delete Employee</title>
-    <div id="delEmp">
+    <title>EditEmployee</title>
 
-        <table class="table table-bordered table-condensed" id="employeeTable">
-            <thead class="thead-dark">
-                <tr>
-                    <th>Employee Id</th>
-                    <th>Name</th>
-                    <th>Age</th>
-                    <th>Office</th>
-                    <th>Position</th>
-                    <th>Salary</th>
-                    <th>Is Current Employee</th>
-                    <th>Action</th>
-                    <th></th>
-                </tr>
-            </thead>
+    <table class="table table-bordered table-condensed" id="employeeTable">
+        <thead class="thead-dark">
+            <tr>
+                <th>Employee Id</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Office</th>
+                <th>Position</th>
+                <th>Salary</th>
+                <th>Is Current Employee</th>
+                <th>Action</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
             @foreach (var item in Model)
             {
                 <tr>
@@ -47,10 +47,10 @@
                         @Html.DisplayFor(modelItem => item.IsCurrentEmployee)
                     </td>
                     <td>
-                        <a class="btn btn-danger btn-sm" onclick="Delete('@Url.Action("Delete", "Employee", new {id = @item.EmployeeId})')"><i class="fa fa-trash fa-lg"></i></a>
+                        <a class="btn btn-primary btn-sm" onclick="Edit('@Url.Action("AddOrEdit", "Employee", new {id = item.EmployeeId})')"><i class="fa fa-pencil fa-lg"></i></a>
                     </td>
                 </tr>
             }
+        </tbody>
+    </table>
 
-        </table>
-    </div>

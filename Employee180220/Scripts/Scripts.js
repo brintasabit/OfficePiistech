@@ -5,6 +5,9 @@
 	$('#employee').click(function() {
 		Employee();
     });
+	$('#edit').click(function () {
+		EditEmployee();
+	});
 	$('#delete').click(function () {
 		DeleteEmployee();
 	});
@@ -22,8 +25,11 @@ var Dashboard = function () {
 var Employee = function() {
 	$('#main').load('/employee/employee');
 }
+var EditEmployee = function () {
+	$('#main').load('/Employee/EditEmployee');
+}
 var DeleteEmployee = function () {
-	$('#main').load('/employee/delete');
+	$('#main').load('/employee/deleteemployee');
 }
 var AddEmployee = function () {
 	$('#main').load('/employee/addoredit');
@@ -61,13 +67,9 @@ function Delete(url) {
 		$.ajax({
 			type: 'POST',
 			url: url,
-			dataType: 'json',
-			contentType: 'application/json; charset=utf-8',
-			error: function (xhr) {
-				alert('Error: ' + xhr.statusText);
-			},
 			success: function (result) {
-				alert('Success');
+                alert('Deleted!');
+                $('#main').load('/employee/deleteemployee');
 			},
 			async: true,
 			processData: false
@@ -75,4 +77,30 @@ function Delete(url) {
 		});
 
 	}
+}
+
+function Edit(url) {
+	$.ajax({
+		type: 'GET',
+		url: url,
+		success: function (result) {
+			alert('Updated!');
+		},
+		async: true,
+		processData: false
+
+	});
+}
+
+function refreshTab(resetUrl) {
+	$.ajax({
+		type: "GET",
+		url: resetUrl,
+		success: function (result) {
+			alert('Refreshed!!');
+		},
+		async: true,
+		processData: false
+
+	});
 }

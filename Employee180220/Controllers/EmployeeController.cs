@@ -27,7 +27,11 @@ namespace Employee180220.Controllers
         }
         public ActionResult DeleteEmployee()
         {
-            return View();
+            return View(GetAllEmployee());
+        }
+        public ActionResult EditEmployee()
+        {
+            return View(GetAllEmployee());
         }
         IEnumerable<EmployeeInfo> GetAllEmployee()
         {

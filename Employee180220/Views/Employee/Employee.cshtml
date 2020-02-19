@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Employee180220.Models.EmployeeInfo>
 @{
     Layout = null;
 }
@@ -34,7 +34,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <link href="/your-path-to-fontawesome/css/all.css" rel="stylesheet">
 <title>Employee</title>
 
@@ -43,48 +43,50 @@
     <button type="button" id="button" class="btn btn-success"><i class="material-icons">person_add</i>Add Employee</button>
 </div>
 <div id="employeeData" class="employeeData">
-    
+
 
     <table class="table table-bordered" id="employeeTable">
         <thead class="thead-dark">
-        <tr>
-            <th>Employee Id</th>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Office</th>
-            <th>Position</th>
-            <th>Salary</th>
-            <th>Is Current Employee</th>
-        </tr>
+            <tr>
+                <th>Employee Id</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Office</th>
+                <th>Position</th>
+                <th>Salary</th>
+                <th>Is Current Employee</th>
+            </tr>
         </thead>
         <tbody>
-        <tr>
-            <th>1</th>
-            <th>Alice</th>
-            <th>24</th>
-            <th>PiisTech</th>
-            <th>Developer</th>
-            <th>20000</th>
-            <th>Yes</th>
-        </tr>
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeeId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Age)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Office)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Position)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Salary)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsCurrentEmployee)
+                </td>
+            </tr>
+        }
         </tbody>
     </table>
 </div>
 
-@*<link href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
-    @section scripts
-    {@Scripts.Render("~/bundles/jqueryval")
-    <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-    <script>
-        function activatejQueryTable() {
-            $("#employeeTable").
-                DataTable();
 
-        }
-        $(function () {
-            activatejQueryTable();
-        });
-    </script>
-    }*@
 
 

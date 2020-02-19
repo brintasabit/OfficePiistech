@@ -3,5 +3,18 @@
     ViewBag.Title = "Index";
 }
 
-<title>Index</title>
+<link href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+@section scripts
+{@Scripts.Render("~/bundles/jqueryval")
+    <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script>
+        function activatejQueryTable() {
+            $("#employeeTable").
+                DataTable();
+        }
+        $(function () {
+            activatejQueryTable();
+        });
+    </script>
+}
 
