@@ -8,9 +8,9 @@
 	$('#button').click(function () {
 		AddEmployee();
     });
-	$('#saveEmployee').click(function () {
-		AddOrEditEmployee();
-	});
+    $('#saveEmp').click(function () {
+        AddOrEditEmployee();
+    });
 });
 
 var Dashboard = function () {
@@ -32,5 +32,20 @@ var AddOrEditEmployee = function() {
         Salary: $('#Salary').val(),
         IsCurrentEmployee: $('#IsCurrentEmployee').val(),
 		ImagePath: $('#ImagePath').val()
-	};
+    };
+    $.ajax({
+	    url: '/Employee/AddOrEdit',
+	    type: 'POST',
+	    data: JSON.stringify(requestData),
+	    dataType: 'json',
+	    contentType: 'application/json; charset=utf-8',
+	    error: function (xhr) {
+		    alert('Error: ' + xhr.statusText);
+	    },
+	    success: function (result) {
+		    alert('Success');
+	    },
+	    async: true,
+	    processData: false
+	});
 }
