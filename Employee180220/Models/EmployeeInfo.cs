@@ -7,11 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Web;
-using System.ComponentModel;
-
 namespace Employee180220.Models
 {
     using System;
@@ -20,20 +15,12 @@ namespace Employee180220.Models
     public partial class EmployeeInfo
     {
         public int EmployeeId { get; set; }
-        [Required(ErrorMessage = "Name Required!")]
         public string Name { get; set; }
         public Nullable<int> Age { get; set; }
         public string Office { get; set; }
         public string Position { get; set; }
         public Nullable<double> Salary { get; set; }
         public Nullable<bool> IsCurrentEmployee { get; set; }
-        [DisplayName("Profile")]
         public string ImagePath { get; set; }
-        [NotMapped]
-        public HttpPostedFileBase ImageUpload { get; set; }
-        public EmployeeInfo()
-        {
-            ImagePath = "~/AppFiles/ImageFiles/Default.png";
-        }
     }
 }

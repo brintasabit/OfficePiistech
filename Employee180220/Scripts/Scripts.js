@@ -5,6 +5,9 @@
 	$('#employee').click(function() {
 		Employee();
     });
+	$('#delete').click(function () {
+		DeleteEmployee();
+	});
 	$('#button').click(function () {
 		AddEmployee();
     });
@@ -18,6 +21,9 @@ var Dashboard = function () {
 }
 var Employee = function() {
 	$('#main').load('/employee/employee');
+}
+var DeleteEmployee = function () {
+	$('#main').load('/employee/delete');
 }
 var AddEmployee = function () {
 	$('#main').load('/employee/addoredit');
@@ -48,4 +54,25 @@ var AddOrEditEmployee = function() {
 	    async: true,
 	    processData: false
 	});
+}
+
+function Delete(url) {
+	if (confirm('Are you sure to delete this record ?') == true) {
+		$.ajax({
+			type: 'POST',
+			url: url,
+			dataType: 'json',
+			contentType: 'application/json; charset=utf-8',
+			error: function (xhr) {
+				alert('Error: ' + xhr.statusText);
+			},
+			success: function (result) {
+				alert('Success');
+			},
+			async: true,
+			processData: false
+
+		});
+
+	}
 }

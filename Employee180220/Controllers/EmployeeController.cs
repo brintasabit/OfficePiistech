@@ -25,6 +25,10 @@ namespace Employee180220.Controllers
         {
             return View(GetAllEmployee());
         }
+        public ActionResult DeleteEmployee()
+        {
+            return View();
+        }
         IEnumerable<EmployeeInfo> GetAllEmployee()
         {
             using (DBModel dB = new DBModel())
@@ -67,6 +71,26 @@ namespace Employee180220.Controllers
 
                 }
                 return Json(new { success = true, html = GlobalClass.RenderRazorViewToString(this, "Employee", GetAllEmployee()), Message = "Submitted Successfully!" }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                return Json(new { success = false, Message = e.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
+        public ActionResult Delete(int id)
+        {
+            try
+            {
+                using (DBModel dB = new DBModel())
+                {
+                    EmployeeInfo emp = dB.EmployeeInfoes.Where(x => x.EmployeeId == id).FirstOrDefault<EmployeeInfo>();
+                    dB.EmployeeInfoes.Remove(emp);
+                    dB.SaveChanges();
+                }
+                return Json(new { success = true, html = GlobalClass.RenderRazorViewToString(this, "Employee", GetAllEmployee()), Message = "Deleted Successfully!" }, JsonRequestBehavior.AllowGet);
+
             }
             catch (Exception e)
             {
