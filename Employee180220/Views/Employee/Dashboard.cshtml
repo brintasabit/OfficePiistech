@@ -1,13 +1,27 @@
-﻿
+﻿@model IEnumerable<Employee180220.Models.EmployeeInfo>
 @{
     Layout = null;
 }
 
 <title>Dashboard</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-@Styles.Render("~/Content/css")
-@Scripts.Render("~/bundles/modernizr")
+@*@Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")*@
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+@*<script src="~/Scripts/Scripts.js"></script>*@
 
+<script>
+    $(document).ready(function () {
+        $('#ffTab').click(function () {
+            ej();
+            alert('Fire fly');
+        });
+    });
+    var ej = function () {
+	$('#employeeTab').load('/Employee/Employee');
+	alert('fire!');
+}
+</script>
 
 <link href="https://fonts.googleapis.com/css?family=Sriracha&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
@@ -25,7 +39,7 @@
     }
 
     #maincontent.main {
-        position: absolute;
+        position: fixed;
         height: 700px;
         width: 90%;
         float: left;
@@ -33,15 +47,15 @@
         font-family: 'Roboto', sans-serif;
         color: #000000;
         left: 13%;
-        top: 13%;
+        top: 12%;
     }
-    .table-bordered {
+    /*.table-bordered {
         position: fixed;
         display: inline-block;
         top: 15%;
         right: 5%;
         left: 15%;
-              
+
     }
     #firstcard.panel-heading {
         position: absolute;
@@ -50,52 +64,69 @@
         width: 500px;
         left: 3%;
         top: 10%;
+    }*/
+    ul.nav.nav-tabs {
+        position: fixed;
+        top: 20%;
+        margin: 10px 0px;
     }
 
+        ul.nav.nav-tabs li:not(.active) a {
+            border-color: #eeeeee;
+            color: gray;
+        }
+
+        ul.nav.nav-tabs li.active a {
+            border-top: 3px solid #16a765
+        }
+
+    #tabContent.tab-content {
+        position: fixed;
+        height: 500px;
+        top: 30%;
+    }
+    #mainTab.mainTabClass {
+        position: fixed;
+        top: 40%;
+        display: inline-block;
+    }
+    /*#employeeTab.tab-pane {
+        position: fixed;
+        height: 300px;
+        top: 30%;
+    }*/
 </style>
 
 <div id="maincontent" class="main">
-    @*<header id="h" class="header"><h6>Employees</h6></header>*@
-    
 
-    <div id="firstcard" class="panel panel-heading">
+    <h1>Dashboard</h1>
 
-        @*<div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Select
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Ascending</a>
-                    <a class="dropdown-item" href="#">Descending</a>
-                </div>
-            </div>*@
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th>Alice</th>
-                    <th>Active</th>
-                </tr>
-                <tr>
-                    <th>Bob</th>
-                    <th>Active</th>
-                </tr>
-                <tr>
-                    <th>Carlos</th>
-                    <th>Pass</th>
-                </tr>
-                <tr>
-                    <th>Doe</th>
-                    <th>Active</th>
-                </tr>
-            </tbody>
-        </table>
+
+    <ul id="nav1" class="nav nav-tabs">
+        <li><a data-toggle="tab" id="ffTab">Employee</a></li>
+        <li><a data-toggle="tab" href="#addTab">Add</a></li>
+        <li><a data-toggle="tab" href="#editTab">Edit</a></li>
+        <li><a data-toggle="tab" href="#deleteTab">Delete</a></li>
+    </ul>
+
+    <div id="tabContent" class="tab-content">
+        
+        <div id="employeeTab" class="tab-pane fade in">
+
+        </div>
+        
+        <div id="addTab" class="tab-pane fade in">
+
+        </div>
+
+        <div id="editTab" class="tab-pane fade in">
+            Employee can be edited
+        </div>
+
+        <div id="deleteTab" class="tab-pane fade in">
+            Delete Employee will work here
+        </div>
+
     </div>
 
 </div>
-

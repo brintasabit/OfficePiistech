@@ -39,9 +39,6 @@
     }
 </style>
 
-
-@*@Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")*@
 <meta name="viewport" content="width=device-width" />
 <title>Add Or Edit Employee</title>
 <div id="addOrEdit">
@@ -53,7 +50,7 @@
             @Html.HiddenFor(model => model.EmployeeId)
             <div class="w3-row-padding">
 
-                <div class="col-md-6">
+                <div class="col-md-7">
                     <div class="w3-half">
 
                         <input class="w3-input w3-border" type="hidden" placeholder="employeeId" id="EmployeeId">
@@ -85,6 +82,10 @@
                     <div id="saveEmp" class="w3-half">
                         <div class="btnButton">
                             <button type="button" class="btn btn-success"><i class="material-icons">person_add</i>Add</button>
+                            @if (Model.EmployeeId != 0)
+                            {
+                                <a class="btn btn-success" id="saveProfile" onclick="refreshTab('@Url.Action("AddOrEdit","Employee",new {id=0})',false)"><i class="fa-fade"></i>Add New</a>
+                            }
                         </div>
                     </div>
                 </div>

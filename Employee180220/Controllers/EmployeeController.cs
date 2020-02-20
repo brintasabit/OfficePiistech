@@ -33,6 +33,7 @@ namespace Employee180220.Controllers
         {
             return View(GetAllEmployee());
         }
+
         IEnumerable<EmployeeInfo> GetAllEmployee()
         {
             using (DBModel dB = new DBModel())
@@ -74,7 +75,7 @@ namespace Employee180220.Controllers
                     }
 
                 }
-                return Json(new { success = true, html = GlobalClass.RenderRazorViewToString(this, "Employee", GetAllEmployee()), Message = "Submitted Successfully!" }, JsonRequestBehavior.AllowGet);
+                return Json(new { success = true, html = GlobalClass.RenderRazorViewToString(this, "EmployeeInfo", GetAllEmployee()), Message = "Submitted Successfully!" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {

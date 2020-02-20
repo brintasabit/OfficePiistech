@@ -17,7 +17,12 @@
     $('#saveEmp').click(function () {
         AddOrEditEmployee();
     });
+    //$('#ffTab').click(function () {
+	   // ej();
+    //    alert('Fire fly');
+    //});
 });
+
 
 var Dashboard = function () {
 	$('#main').load('/Employee/Dashboard');
@@ -34,6 +39,10 @@ var DeleteEmployee = function () {
 var AddEmployee = function () {
 	$('#main').load('/employee/addoredit');
 }
+//var ej = function () {
+//	$('#employeeTab').load('/Employee/Employee');
+//	alert('fire!');
+//}
 var AddOrEditEmployee = function() {
 	var requestData = {
 		EmployeeId: $('#EmployeeId').val(),
@@ -84,7 +93,7 @@ function Edit(url) {
 		type: 'GET',
 		url: url,
 		success: function (response) {
-alert('Updated');
+		alert('Updated');
 		},
 		async: true,
 		processData: false
