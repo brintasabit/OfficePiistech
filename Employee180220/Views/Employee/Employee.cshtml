@@ -1,4 +1,7 @@
-﻿@model IEnumerable<Employee180220.Models.EmployeeInfo>
+﻿<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/Scripts.js"></script>
+
+@model IEnumerable<Employee180220.Models.EmployeeInfo>
 @{
     Layout = null;
 }
@@ -11,7 +14,7 @@
         text-decoration: none;
     }
 
-    .btnButton {
+    .btnButton1 {
         position: fixed;
         float: right;
         top: 13%;
@@ -20,30 +23,17 @@
 
     #employeeData.employeeData {
         position: absolute;
-        
         width: 100%;
-        
         height: 400px;
     }
 </style>
 <meta name="viewport" content="width=device-width" />
-@Styles.Render("~/Content/css")
-@Scripts.Render("~/bundles/modernizr")
-<script src="~/Scripts/jquery-3.3.1.min.js"></script>
-<script src="~/Scripts/Scripts.js"></script>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<link href="https://fonts.googleapis.com/css?family=Sriracha&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<link href="/your-path-to-fontawesome/css/all.css" rel="stylesheet">
+
 <title>Employee</title>
 
 <h2>Employees Information</h2>
-<div class="btnButton">
-    <button type="button" id="button" class="btn btn-success"><i class="material-icons">person_add</i>Add Employee</button>
+<div id="button" class="btnButton1">
+    <button type="submit" class="btn btn-success"><i class="material-icons">person_add</i>Add Employee</button>
 </div>
 <div id="employeeData" class="employeeData">
 
@@ -61,31 +51,32 @@
             </tr>
         </thead>
         <tbody>
-        @foreach (var item in Model) {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EmployeeId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Age)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Office)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Position)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Salary)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IsCurrentEmployee)
-                </td>
-            </tr>
-        }
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EmployeeId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Age)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Office)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Position)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Salary)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsCurrentEmployee)
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
 </div>

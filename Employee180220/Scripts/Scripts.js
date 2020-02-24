@@ -1,74 +1,68 @@
 ﻿$(document).ready(function () {
-	$('#lnkdashboard').click(function () {
+    $('#lnkdashboard').unbind().click(function () {
 		Dashboard();
     });
-	$('#employee').click(function() {
-		Employee();
+    $('#employee').click(function() {
+        Employee();
     });
-	$('#edit').click(function () {
+    $('#edit').unbind().click(function () {
 		EditEmployee();
 	});
-	$('#delete').click(function () {
+    $('#delete').unbind().click(function () {
 		DeleteEmployee();
 	});
-	$('#button').click(function () {
-		AddEmployee();
-    });
+    //$('#button1').click(function () {
+    //    //AddEmployee();
+    //    alert('fire!');
+    //});
     $('#saveEmp').click(function () {
         AddOrEditEmployee();
+        $(this).unbind();
     });
-    //$('#ffTab').click(function () {
-	   // ej();
-    //    alert('Fire fly');
-    //});
+
 });
 
-
+var AddOrEditEmployee = function () {
+	var requestData = {
+		EmployeeId: $('#EmployeeId').val(),
+		Name: $('#Name').val(),
+		Age: $('#Age').val(),
+		Office: $('#Office').val(),
+		Position: $('#Position').val(),
+		Salary: $('#Salary').val(),
+		IsCurrentEmployee: $('#IsCurrentEmployee').val(),
+		ImagePath: $('#ImagePath').val()
+	};
+	$.ajax({
+		url: '/Employee/AddOrEdit',
+		type: 'POST',
+		data: JSON.stringify(requestData),
+		dataType: 'json',
+		contentType: 'application/json; charset=utf-8',
+		error: function (xhr) {
+			alert('Error: ' + xhr.statusText);
+		},
+		success: function (result) {
+			alert('Success');
+		},
+		async: true,
+		processData: false
+	});
+}
 var Dashboard = function () {
 	$('#main').load('/Employee/Dashboard');
 }
 var Employee = function() {
-	$('#main').load('/employee/employee');
+	$('#main').load('/Employee/Employee');
 }
 var EditEmployee = function () {
 	$('#main').load('/Employee/EditEmployee');
 }
 var DeleteEmployee = function () {
-	$('#main').load('/employee/deleteemployee');
+	$('#main').load('/Employee/DeleteEmployee');
 }
 var AddEmployee = function () {
-	$('#main').load('/employee/addoredit');
-}
-//var ej = function () {
-//	$('#employeeTab').load('/Employee/Employee');
-//	alert('fire!');
-//}
-var AddOrEditEmployee = function() {
-	var requestData = {
-		EmployeeId: $('#EmployeeId').val(),
-        Name: $('#Name').val(),
-        Age:$('#Age').val(),
-		Office: $('#Office').val(),
-		Position: $('#Position').val(),
-        Salary: $('#Salary').val(),
-        IsCurrentEmployee: $('#IsCurrentEmployee').val(),
-		ImagePath: $('#ImagePath').val()
-    };
-    $.ajax({
-	    url: '/Employee/AddOrEdit',
-	    type: 'POST',
-	    data: JSON.stringify(requestData),
-	    dataType: 'json',
-	    contentType: 'application/json; charset=utf-8',
-	    error: function (xhr) {
-		    alert('Error: ' + xhr.statusText);
-	    },
-	    success: function (result) {
-		    alert('Success');
-	    },
-	    async: true,
-	    processData: false
-	});
+	$('#main').load('/Employee/AddOrEdit');
 }
 
 function Delete(url) {

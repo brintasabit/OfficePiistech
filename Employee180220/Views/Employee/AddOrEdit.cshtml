@@ -1,18 +1,10 @@
-﻿@model Employee180220.Models.EmployeeInfo
+﻿<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/Scripts.js"></script>
+
+@model Employee180220.Models.EmployeeInfo
 @{
     Layout = null;
 }
-<script src="~/Scripts/jquery-3.3.1.min.js"></script>
-<script src="~/Scripts/Scripts.js"></script>
-
-@*<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<link href="/your-path-to-fontawesome/css/all.css" rel="stylesheet">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">*@
 
 
 <style>
@@ -41,7 +33,11 @@
     }
 </style>
 
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
 <meta name="viewport" content="width=device-width" />
+
+
 <title>Add Or Edit Employee</title>
 <div id="addOrEdit">
     <div class="w3-card-4">
@@ -83,15 +79,11 @@
                     </div>
                     <div id="saveEmp" class="w3-half">
                         <div class="btnButton">
-                            <button type="button" class="btn btn-success"><i class="material-icons">person_add</i>Add</button>
-                            @if (Model.EmployeeId != 0)
-                            {
-                                <a class="btn btn-success" id="saveProfile" onclick="refreshTab('@Url.Action("AddOrEdit","Employee",new {id=0})',false)"><i class="fa-fade"></i>Add New</a>
-                            }
+                            <button type="submit" class="btn btn-success"><i class="material-icons">person_add</i>Add</button>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-7">
                     <div class="w3-half">
                         <label>Profile Image</label>
                         <input class="w3-input w3-border" type="hidden" placeholder="ImagePath" id="ImagePath">
