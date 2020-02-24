@@ -3,33 +3,50 @@
     Layout = null;
 }
 
+
 <title>Dashboard</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 @*@Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")*@
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
-@*<script src="~/Scripts/Scripts.js"></script>*@
+<script src="~/Scripts/Scripts.js"></script>
 
 <script>
     $(document).ready(function () {
-        $('#ffTab').click(function () {
-            ej();
-            alert('Fire fly');
+        $('#employeeTab').click(function () {
+            employeeTabContent();
+        });
+        $('#aaddTab').click(function () {
+            addTabContent();
+        });
+        $('#editTab').click(function () {
+            editTabContent();
+        });
+        $('#deleteTab').click(function () {
+            deleteTabContent();
         });
     });
-    var ej = function () {
-	$('#employeeTab').load('/Employee/Employee');
-	alert('fire!');
-}
+
+    var employeeTabContent = function () {
+        $('#tabContent').load('/Employee/Employee');
+    }
+    var addTabContent = function () {
+        $('#tabContent').load('/Employee/AddOrEdit');
+    }
+    var editTabContent = function () {
+        $('#tabContent').load('/Employee/EditEmployee');
+    }
+    var deleteTabContent = function () {
+        $('#tabContent').load('/Employee/DeleteEmployee');
+    }
 </script>
 
 <link href="https://fonts.googleapis.com/css?family=Sriracha&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+@*<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">*@
+@*<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">*@
 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 <style>
     * {
         margin: 0;
@@ -81,10 +98,13 @@
         }
 
     #tabContent.tab-content {
-        position: fixed;
+        position: absolute;
+        width: 97%;
+        overflow: scroll;
         height: 500px;
-        top: 30%;
+        top: 20%;
     }
+
     #mainTab.mainTabClass {
         position: fixed;
         top: 40%;
@@ -103,18 +123,18 @@
 
 
     <ul id="nav1" class="nav nav-tabs">
-        <li><a data-toggle="tab" id="ffTab">Employee</a></li>
-        <li><a data-toggle="tab" href="#addTab">Add</a></li>
-        <li><a data-toggle="tab" href="#editTab">Edit</a></li>
-        <li><a data-toggle="tab" href="#deleteTab">Delete</a></li>
+        <li><a data-toggle="tab" id="employeeTab">Employee</a></li>
+        <li><a data-toggle="tab" id="aaddTab">Add</a></li>
+        <li><a data-toggle="tab" id="editTab">Edit</a></li>
+        <li><a data-toggle="tab" id="deleteTab">Delete</a></li>
     </ul>
 
     <div id="tabContent" class="tab-content">
-        
+
         <div id="employeeTab" class="tab-pane fade in">
 
         </div>
-        
+
         <div id="addTab" class="tab-pane fade in">
 
         </div>
