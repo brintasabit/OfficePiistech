@@ -38,7 +38,8 @@ namespace Employee180220.Controllers
         {
             using (DBModel dB = new DBModel())
             {
-                return dB.EmployeeInfoes.ToList<EmployeeInfo>();
+                var employeelsit = dB.EmployeeInfoes.ToList<EmployeeInfo>();
+                return employeelsit;
             }
 
         }

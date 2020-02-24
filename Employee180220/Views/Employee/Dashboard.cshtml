@@ -8,22 +8,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 @Styles.Render("~/Content/css")
 @Scripts.Render("~/bundles/modernizr")
-<script src="~/Scripts/jquery-3.3.1.min.js"></script>
-<script src="~/Scripts/Scripts.js"></script>
+@*<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/Scripts.js"></script>*@
 
 <script>
     $(document).ready(function () {
-        $('#employeeTab').unbind().click(function () {
+        console.log('document ready');
+        $('#eemployeeTab').unbind().click(function () {
             employeeTabContent();
+            //$(this).unbind();
         });
         $('#aaddTab').unbind().click(function () {
             addTabContent();
+            //$(this).unbind();
         });
-        $('#editTab').unbind().click(function () {
+        $('#eeditTab').unbind().click(function () {
             editTabContent();
+            //$(this).unbind();
         });
-        $('#deleteTab').unbind().click(function () {
+        $('#ddeleteTab').unbind().click(function () {
             deleteTabContent();
+            //$(this).unbind();
         });
     });
 
@@ -41,11 +46,6 @@
     }
 </script>
 
-<link href="https://fonts.googleapis.com/css?family=Sriracha&display=swap" rel="stylesheet">
-@*<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">*@
-@*<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">*@
-
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <style>
     * {
@@ -55,7 +55,7 @@
         text-decoration: none;
     }
 
-    #maincontent.main {
+    #mainContentDashboard.mainContentDashboard {
         position: fixed;
         height: 700px;
         width: 90%;
@@ -117,16 +117,16 @@
     }*/
 </style>
 
-<div id="maincontent" class="main">
+<div id="mainContentDashboard" class="mainContentDashboard">
 
     <h1>Dashboard</h1>
 
 
     <ul id="nav1" class="nav nav-tabs">
-        <li><a data-toggle="tab" id="employeeTab">Employee</a></li>
+        <li><a data-toggle="tab" id="eemployeeTab">Employee</a></li>
         <li><a data-toggle="tab" id="aaddTab">Add</a></li>
-        <li><a data-toggle="tab" id="editTab">Edit</a></li>
-        <li><a data-toggle="tab" id="deleteTab">Delete</a></li>
+        <li><a data-toggle="tab" id="eeditTab">Edit</a></li>
+        <li><a data-toggle="tab" id="ddeleteTab">Delete</a></li>
     </ul>
 
     <div id="tabContent" class="tab-content">

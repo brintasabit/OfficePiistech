@@ -1,12 +1,45 @@
-﻿<script src="~/Scripts/jquery-3.3.1.min.js"></script>
-<script src="~/Scripts/Scripts.js"></script>
+﻿@*<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/Scripts.js"></script>*@
 
 @model Employee180220.Models.EmployeeInfo
 @{
     Layout = null;
 }
 
-
+<script>
+    $('#saveEmp').click(function () {
+        alert('saveEmp clicked');
+        AddOrEditEmployee();
+        $(this).unbind();
+    });
+    var AddOrEditEmployee = function () {
+        var requestData = {
+            EmployeeId: $('#EmployeeId').val(),
+            Name: $('#Name').val(),
+            Age: $('#Age').val(),
+            Office: $('#Office').val(),
+            Position: $('#Position').val(),
+            Salary: $('#Salary').val(),
+            IsCurrentEmployee: $('#IsCurrentEmployee').val(),
+            ImagePath: $('#ImagePath').val()
+        };
+        $.ajax({
+            url: '/Employee/AddOrEdit',
+            type: 'POST',
+            data: JSON.stringify(requestData),
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            error: function (xhr) {
+                alert('Error: ' + xhr.statusText);
+            },
+            success: function (result) {
+                alert('Success');
+            },
+            async: true,
+            processData: false
+        });
+    }
+</script>
 <style>
     * {
         margin: 0;

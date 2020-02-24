@@ -1,11 +1,20 @@
-﻿<script src="~/Scripts/jquery-3.3.1.min.js"></script>
-<script src="~/Scripts/Scripts.js"></script>
+﻿
 
 @model IEnumerable<Employee180220.Models.EmployeeInfo>
 @{
     Layout = null;
 }
-
+<script>
+    $('#button2').unbind().click(function () {
+        alert('button2 clicked');
+        AddEmployee();
+        $(this).unbind();
+    });
+    var AddEmployee = function () {
+	
+        $('#main').load('/Employee/AddOrEdit');
+    }
+</script>
 <style>
     * {
         margin: 0;
@@ -32,7 +41,7 @@
 <title>Employee</title>
 
 <h2>Employees Information</h2>
-<div id="button" class="btnButton1">
+<div id="button2" class="btnButton1">
     <button type="submit" class="btn btn-success"><i class="material-icons">person_add</i>Add Employee</button>
 </div>
 <div id="employeeData" class="employeeData">
