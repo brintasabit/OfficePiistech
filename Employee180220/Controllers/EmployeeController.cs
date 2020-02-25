@@ -58,7 +58,7 @@ namespace Employee180220.Controllers
             return View(emp);
         }
         [HttpPost]
-        public ActionResult AddOrEdit(EmployeeInfo emp)
+        public JsonResult AddOrEdit(EmployeeInfo emp)
         {
             try
             {
@@ -87,7 +87,7 @@ namespace Employee180220.Controllers
         }
 
 
-        public ActionResult Delete(int id)
+        public JsonResult Delete(int id)
         {
             try
             {

@@ -58,33 +58,17 @@ function Delete(url) {
 	}
 }
 
-function Edit(url) {
+
+
+function refreshTab(resetUrl) {
 	$.ajax({
-		type: 'GET',
-		url: url,
-		//success: function (response) {
-		//alert('Updated');
-		//},
-		//async: true,
-		//processData: false
-		success: function (response) {
-            $("#addOrEdit").html(response);
-			//$('ul.nav.nav-tabs a:eq(1)').html('Edit');
-			//$('ul.nav.nav-tabs a:eq(1)').tab('show');
-		}
+		type: "GET",
+		url: resetUrl,
+		success: function (result) {
+			alert('Refreshed!!');
+		},
+		async: true,
+		processData: false
 
 	});
 }
-
-//function refreshTab(resetUrl) {
-//	$.ajax({
-//		type: "GET",
-//		url: resetUrl,
-//		success: function (result) {
-//			alert('Refreshed!!');
-//		},
-//		async: true,
-//		processData: false
-
-//	});
-//}

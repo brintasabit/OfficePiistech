@@ -1,6 +1,4 @@
-﻿@*<script src="~/Scripts/jquery-3.3.1.min.js"></script>
-<script src="~/Scripts/Scripts.js"></script>*@
-
+﻿
 @model Employee180220.Models.EmployeeInfo
 @{
     Layout = null;
@@ -87,31 +85,38 @@
                     </div>
                     <div class="w3-half">
                         <label>Name</label>
-                        <input class="w3-input w3-border" type="text" placeholder="Name" id="Name">
+                        <input class="w3-input w3-border" type="text" placeholder="Name" id="Name" value="@Model.Name">
+                        @*@Html.EditorFor(model => model.Name, "", new { @class = "text-danger" })*@
                     </div>
                     <div class="w3-half">
                         <label>Age</label>
                         <input class="w3-input w3-border" type="text" placeholder="Age" id="Age">
+                        @*@Html.EditorFor(model => model.Age, "", new { @class = "text-danger" })*@
                     </div>
                     <div class="w3-half">
                         <label>Office</label>
                         <input class="w3-input w3-border" type="text" placeholder="Office" id="Office">
+                        @*@Html.EditorFor(model => model.Office, "", new { @class = "text-danger" })*@
                     </div>
                     <div class="w3-half">
                         <label>Position</label>
                         <input class="w3-input w3-border" type="text" placeholder="Position" id="Position">
+                        @*@Html.EditorFor(model => model.Position, "", new { @class = "text-danger" })*@
                     </div>
                     <div class="w3-half">
                         <label>Salary</label>
                         <input class="w3-input w3-border" type="text" placeholder="Salary" id="Salary">
+                        @*@Html.EditorFor(model => model.Salary, "", new { @class = "text-danger" })*@
                     </div>
                     <div class="w3-half">
                         <label>Is Current Employee?</label>
-                        <input class="w3-input w3-border" type="checkbox" id="IsCurrentEmployee">
+                        @*<input class="w3-input w3-border" type="checkbox" id="IsCurrentEmployee">*@
+                        @Html.EditorFor(model => model.IsCurrentEmployee, "", new { @class = "text-danger" })
                     </div>
                     <div id="saveEmp" class="w3-half">
                         <div class="btnButton">
                             <button type="submit" class="btn btn-success"><i class="material-icons">person_add</i>Add</button>
+
                         </div>
                     </div>
                 </div>
@@ -119,6 +124,7 @@
                     <div class="w3-half">
                         <label>Profile Image</label>
                         <input class="w3-input w3-border" type="hidden" placeholder="ImagePath" id="ImagePath">
+                        @*@Html.HiddenFor(model => model.ImagePath)*@
                     </div>
                 </div>
             </div>
