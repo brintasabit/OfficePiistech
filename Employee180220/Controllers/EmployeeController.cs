@@ -51,7 +51,7 @@ namespace Employee180220.Controllers
             {
                 using (DBModel db = new DBModel())
                 {
-                    emp = db.EmployeeInfoes.Where(x => x.EmployeeId == id).FirstOrDefault<EmployeeInfo>();
+                    emp = db.EmployeeInfoes.Where(x => x.EmployeeId == id).First<EmployeeInfo>();
                 }
             }
 
@@ -76,11 +76,13 @@ namespace Employee180220.Controllers
                     }
 
                 }
-                return Json(new { success = true, html = GlobalClass.RenderRazorViewToString(this, "EmployeeInfo", GetAllEmployee()), Message = "Submitted Successfully!" }, JsonRequestBehavior.AllowGet);
+                var json= Json(new { success = true, html = GlobalClass.RenderRazorViewToString(this, "EmployeeInfo", GetAllEmployee()), Message = "Submitted Successfully!" }, JsonRequestBehavior.AllowGet);
+                return json;
             }
             catch (Exception e)
             {
-                return Json(new { success = false, Message = e.Message }, JsonRequestBehavior.AllowGet);
+                var json= Json(new { success = false, Message = e.Message }, JsonRequestBehavior.AllowGet);
+                return json;
             }
         }
 
@@ -95,12 +97,13 @@ namespace Employee180220.Controllers
                     dB.EmployeeInfoes.Remove(emp);
                     dB.SaveChanges();
                 }
-                return Json(new { success = true, html = GlobalClass.RenderRazorViewToString(this, "Employee", GetAllEmployee()), Message = "Deleted Successfully!" }, JsonRequestBehavior.AllowGet);
-
+                var json= Json(new { success = true, html = GlobalClass.RenderRazorViewToString(this, "Employee", GetAllEmployee()), Message = "Deleted Successfully!" }, JsonRequestBehavior.AllowGet);
+                return json;
             }
             catch (Exception e)
             {
-                return Json(new { success = false, Message = e.Message }, JsonRequestBehavior.AllowGet);
+                var json= Json(new { success = false, Message = e.Message }, JsonRequestBehavior.AllowGet);
+                return json;
             }
         }
     }

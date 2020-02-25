@@ -8,9 +8,8 @@
 
 <script>
     $('#saveEmp').click(function () {
-        alert('saveEmp clicked');
+        console.log('Save Emp clicked');
         AddOrEditEmployee();
-        $(this).unbind();
     });
     var AddOrEditEmployee = function () {
         var requestData = {
