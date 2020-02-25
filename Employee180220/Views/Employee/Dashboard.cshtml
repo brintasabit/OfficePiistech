@@ -12,8 +12,7 @@
 <script src="~/Scripts/Scripts.js"></script>*@
 
 <script>
-    $(document).ready(function () {
-        console.log('document ready');
+    
         $('#eemployeeTab').unbind().click(function () {
             employeeTabContent();
             //$(this).unbind();
@@ -30,7 +29,6 @@
             deleteTabContent();
             //$(this).unbind();
         });
-    });
 
     var employeeTabContent = function () {
         $('#tabContent').load('/Employee/Employee');
