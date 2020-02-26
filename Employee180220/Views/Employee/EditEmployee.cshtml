@@ -4,11 +4,12 @@
     Layout = null;
 }
 <script>
-    $('#update').click(function () {
+
+    //$('#update').click(function () {
      
-        console.log('Update Emp clicked');
-        Edit();
-    });
+    //    console.log('Update Emp clicked');
+    //    Edit();
+    //});
     //var Edit = function () {
         
     //    var id = $(this).find("td:first-child").text();
@@ -33,34 +34,56 @@
     //        processData: false
     //    });
     //}
-
-    var Edit = function () {
-        var requestData = {
-            EmployeeId: $('#EmployeeId').val(),
-            Name: $('#Name').val(),
-            Age: $('#Age').val(),
-            Office: $('#Office').val(),
-            Position: $('#Position').val(),
-            Salary: $('#Salary').val(),
-            IsCurrentEmployee: $('#IsCurrentEmployee').val(),
-            ImagePath: $('#ImagePath').val()
-        };
+    var Edit = function (url) {
         $.ajax({
-            url: '/Employee/AddOrEdit',
             type: 'GET',
-            data: JSON.stringify(requestData),
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            error: function (xhr) {
-                alert('Error: ' + xhr.statusText);
-            },
-            success: function (result) {
-                alert('Success');
-            },
-            async: true,
-            processData: false
+            url: url,
+            success: function (response) {
+                $("#tabContent").html(response);
+            }
+
         });
     }
+    //var Edit = function (id) {
+    //    //var requestData = {
+    //    //    EmployeeId: $('#EmployeeId').val(),
+    //    //    Name: $('#Name').val(),
+    //    //    Age: $('#Age').val(),
+    //    //    Office: $('#Office').val(),
+    //    //    Position: $('#Position').val(),
+    //    //    Salary: $('#Salary').val(),
+    //    //    IsCurrentEmployee: $('#IsCurrentEmployee').val(),
+    //    //    ImagePath: $('#ImagePath').val()
+    //    //}
+        
+    //    $.ajax({
+    //        url: '/Employee/AddOrEdit',
+    //        type: 'GET',
+    //        //data: JSON.stringify(),
+            
+    //        dataType: 'text',
+    //        contentType: 'application/json; charset=utf-8',
+    //        error: function (xhr) {
+    //            alert('Error: ' + xhr.statusText);
+    //        },
+    //        success: function (response) {
+    //            alert('Success');
+    //            $('#tabContent').load("/Employee/AddOrEdit?id=38");
+    //            //$('#EmployeeId').val(),
+    //            //    $('#Name').val(),
+    //            //    $('#Age').val(),
+    //            //    $('#Office').val(),
+    //            //    $('#Position').val(),
+    //            //    $('#Salary').val(),
+    //            //    $('#IsCurrentEmployee').val(),
+    //            //    $('#ImagePath').val()
+    //            //$('#addOrEdit').html(response);
+
+    //        },
+    //        async: true,
+    //        processData: false
+    //    });
+    //}
 
 </script>
 <meta name="viewport" content="width=device-width" />
@@ -105,7 +128,7 @@
                     @Html.DisplayFor(modelItem => item.IsCurrentEmployee)
                 </td>
                 <td>
-                    <a class="btn btn-primary btn-sm" id="update" jId="@item.EmployeeId" @*onclick="Edit('@Url.Action("AddOrEdit", "Employee", new {id = item.EmployeeId})')"*@><i class="fa fa-pencil fa-lg"></i></a>
+                    <a class="btn btn-primary btn-sm" @*id="update" jid="@item.EmployeeId"*@ onclick="Edit('@Url.Action("AddOrEdit", "Employee", new {id = item.EmployeeId})')"><i class="fa fa-pencil fa-lg"></i></a>
                 </td>
             </tr>
         }
