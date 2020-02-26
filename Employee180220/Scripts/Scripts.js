@@ -41,7 +41,12 @@ var DeleteEmployee = function () {
 }
 
 
-
+$("#anythingSearch").on("keyup", function () {
+	var value = $(this).val().toLowerCase();
+    $("#employeeTable *").filter(function () {
+		$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+	});
+});
 
 //function refreshTab(resetUrl) {
 //	$.ajax({

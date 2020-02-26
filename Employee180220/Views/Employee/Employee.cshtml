@@ -5,6 +5,13 @@
     Layout = null;
 }
 <script>
+    $("#tableSearch").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#employeeTable tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+
     $('#button2').unbind().click(function () {
         console.log('Button clicked');
         AddEmployee();
@@ -14,6 +21,15 @@
 	
         $('#main').load('/Employee/AddOrEdit');
     }
+
+    $('.mdb-select').materialSelect();
+    $('.select-wrapper.md-form.md-outline input.select-dropdown').bind('focus blur', function () {
+        $(this).closest('.select-outline').find('label').toggleClass('active');
+        $(this).closest('.select-outline').find('.caret').toggleClass('active');
+    });
+
+
+
 </script>
 <style>
     * {
@@ -36,6 +52,7 @@
         width: 97%;
         height: 500px;
     }
+
 </style>
 <meta name="viewport" content="width=device-width" />
 
@@ -47,6 +64,17 @@
 </div>
 <div id="employeeData" class="employeeData">
 
+    <input class="form-control mb-4" id="tableSearch" type="text" placeholder="Search">
+    <div class="col-md-6 select-outline">
+        <select class="mdb-select md-form md-outline colorful-select dropdown-primary">
+            <option value="" selected>Choose your option</option>
+            <option value="1">True</option>
+            <option value="2">False</option>
+            
+        </select>
+        <label>Search</label>
+
+    </div>
 
     <table class="table table-bordered" id="employeeTable">
         <thead class="thead-dark">

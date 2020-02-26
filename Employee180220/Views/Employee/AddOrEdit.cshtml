@@ -5,10 +5,20 @@
 }
 
 <script>
+    //function ShowImagePreview(imageUploader, previewImage) {
+    //    if (imageUploader.files && imageUploader.files[0]) {
+    //        var reader = new FileReader();
+    //        reader.onload = function (e) {
+    //            $(previewImage).attr('src', e.target.result);
+    //        }
+    //        reader.readAsDataURL(imageUploader.files[0]);
 
+    //    }
+    //}
     $('#saveEmp').click(function () {
         console.log('Save Emp clicked');
         AddOrEditEmployee();
+        
     });
     var AddOrEditEmployee = function () {
         var requestData = {
@@ -32,6 +42,7 @@
             },
             success: function (result) {
                 $.notify("Successfull!", "success");
+                $('#main').load('/Employee/Employee');
             },
             async: true,
             processData: false
@@ -62,6 +73,14 @@
         left: 54%;
         top: 67%;
     }
+    col-md-8{
+        position: fixed;
+        height: 50px;
+        width: 50px;
+        left: 90%;
+        
+        margin: 10px;
+    }
 </style>
 
 @Styles.Render("~/Content/css")
@@ -77,6 +96,7 @@
         </header>
         <div id="w3-container" class="w3-container">
             @Html.HiddenFor(model => model.EmployeeId)
+            @Html.HiddenFor(model => model.ImagePath)
             <div class="w3-row-padding">
 
                 <div class="col-md-7">
@@ -84,59 +104,62 @@
 
                         <input class="w3-input w3-border" type="hidden" placeholder="employeeId" id="EmployeeId" value="@Model.EmployeeId">
                     </div>
-                    
-                        <div class="w3-half">
-                            <label>Name</label>
-                            <input class="w3-input w3-border" type="text" placeholder="Name" id="Name" value="@Model.Name">
-                        </div>
-                    
-                    
-                        <div class="w3-half">
-                            <label>Age</label>
-                            <input class="w3-input w3-border" type="text" placeholder="Age" id="Age" value="@Model.Age">
-                        </div>
-                    
-                    
-                        <div class="w3-half">
-                            <label>Office</label>
-                            <input class="w3-input w3-border" type="text" placeholder="Office" id="Office" value="@Model.Office">
-                        </div>
-                    
-                    
-                        <div class="w3-half">
-                            <label>Position</label>
-                            <input class="w3-input w3-border" type="text" placeholder="Position" id="Position" value="@Model.Position">
-                        </div>
-                    
-                    
-                        <div class="w3-half">
-                            <label>Salary</label>
-                            <input class="w3-input w3-border" type="text" placeholder="Salary" id="Salary" value="@Model.Salary">
-                        </div>
-                    
-                    
-                        <div class="w3-half">
-                            <label>Is Current Employee?</label>
-                            @*<input class="w3-input w3-border" type="checkbox" id="IsCurrentEmployee">*@
-                            @Html.EditorFor(model => model.IsCurrentEmployee, "", new { @class = "text-danger" })
-                        </div>
-                    
-                    
-                        <div id="saveEmp" class="w3-half">
-                            <div class="btnButton">
-                                <button type="submit" class="btn btn-success"><i class="material-icons">person_add</i>Add</button>
 
-                            </div>
-                        </div>
-                    
-                </div>
-                @*<div class="col-md-7">
                     <div class="w3-half">
-                        <label>Profile Image</label>*@
-                        @*<input class="w3-input w3-border" type="hidden" placeholder="ImagePath" id="ImagePath" value="@Model.ImagePath">*@
-                        @*@Html.HiddenFor(model => model.ImagePath)
+                        <label>Name</label>
+                        <input class="w3-input w3-border" type="text" placeholder="Name" id="Name" value="@Model.Name">
+                    </div>
+
+
+                    <div class="w3-half">
+                        <label>Age</label>
+                        <input class="w3-input w3-border" type="text" placeholder="Age" id="Age" value="@Model.Age">
+                    </div>
+
+
+                    <div class="w3-half">
+                        <label>Office</label>
+                        <input class="w3-input w3-border" type="text" placeholder="Office" id="Office" value="@Model.Office">
+                    </div>
+
+
+                    <div class="w3-half">
+                        <label>Position</label>
+                        <input class="w3-input w3-border" type="text" placeholder="Position" id="Position" value="@Model.Position">
+                    </div>
+
+
+                    <div class="w3-half">
+                        <label>Salary</label>
+                        <input class="w3-input w3-border" type="text" placeholder="Salary" id="Salary" value="@Model.Salary">
+                    </div>
+
+
+                    <div class="w3-half">
+                        <label>Is Current Employee?</label>
+                        @*<input class="w3-input w3-border" type="checkbox" id="IsCurrentEmployee">*@
+                        @Html.EditorFor(model => model.IsCurrentEmployee, "", new { @class = "text-danger" })
+                    </div>
+
+
+                    <div id="saveEmp" class="w3-half">
+                        <div class="btnButton">
+                            <button type="submit" class="btn btn-success"><i class="material-icons">person_add</i>Add</button>
+                        </div>
+                    </div>
+
+
+                </div>
+                @*<div id="image" class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ImagePath, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-8">
+                            <img src="@Url.Content(Model.ImagePath)" id="imagePreview" />
+                            <input type="file" name="ImageUpload" accept="image/jpeg, image/png" onchange="ShowImagePreview(this,document.getElementById('imagePreview'))" />
+                        </div>
                     </div>
                 </div>*@
+
             </div>
 
         </div>

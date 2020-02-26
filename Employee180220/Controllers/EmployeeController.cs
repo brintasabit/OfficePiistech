@@ -62,6 +62,14 @@ namespace Employee180220.Controllers
         {
             try
             {
+                if (emp.ImageUpload != null)
+                {
+                    var fileName = Path.GetFileNameWithoutExtension(emp.ImageUpload.FileName);
+                    var extension = Path.GetExtension(emp.ImageUpload.FileName);
+                    fileName = fileName + DateTime.Now.ToString("yy-MMM-dd ddd") + extension;
+                    emp.ImagePath = "~/AppFiles/ImageFiles/" + fileName;
+                    emp.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/AppFiles/ImageFiles/"), fileName));
+                }
                 using (DBModel db = new DBModel())
                 {
                     if (emp.EmployeeId == 0)
