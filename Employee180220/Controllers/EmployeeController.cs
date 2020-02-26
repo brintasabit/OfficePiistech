@@ -84,7 +84,7 @@ namespace Employee180220.Controllers
                     }
 
                 }
-                var json= Json(new { success = true, html = GlobalClass.RenderRazorViewToString(this, "EmployeeInfo", GetAllEmployee()), Message = "Submitted Successfully!" }, JsonRequestBehavior.AllowGet);
+                var json= Json(new { success = true, Message = "Submitted Successfully!" }, JsonRequestBehavior.AllowGet);
                 return json;
             }
             catch (Exception e)
@@ -105,7 +105,7 @@ namespace Employee180220.Controllers
                     dB.EmployeeInfoes.Remove(emp);
                     dB.SaveChanges();
                 }
-                var json= Json(new { success = true, html = GlobalClass.RenderRazorViewToString(this, "Employee", GetAllEmployee()), Message = "Deleted Successfully!" }, JsonRequestBehavior.AllowGet);
+                var json= Json(new { success = true, Message = "Deleted Successfully!" }, JsonRequestBehavior.AllowGet);
                 return json;
             }
             catch (Exception e)
@@ -113,6 +113,17 @@ namespace Employee180220.Controllers
                 var json= Json(new { success = false, Message = e.Message }, JsonRequestBehavior.AllowGet);
                 return json;
             }
+        }
+
+        public JsonResult Search(int id)
+        {
+            using (DBModel dB = new DBModel())
+            {
+                EmployeeInfo emp = dB.EmployeeInfoes.Where(x => x.EmployeeId == id).FirstOrDefault<EmployeeInfo>();
+                dB.EmployeeInfoes.Find(emp);
+            }
+            var json = Json(new { success = true, Message = "Found Successfully!" }, JsonRequestBehavior.AllowGet);
+            return json;
         }
     }
 }
