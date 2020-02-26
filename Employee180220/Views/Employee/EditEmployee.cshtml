@@ -35,15 +35,19 @@
     //    });
     //}
     var Edit = function (url) {
+        console.log('Ajax call');
         $.ajax({
             type: 'GET',
             url: url,
             success: function (response) {
-                $("#tabContent").html(response);
+                $("#main").html(response);
+               
             }
 
         });
+        
     }
+    
     //var Edit = function (id) {
     //    //var requestData = {
     //    //    EmployeeId: $('#EmployeeId').val(),

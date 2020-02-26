@@ -12,19 +12,23 @@
 
 <script>
     
-        $('#eemployeeTab').unbind().click(function () {
+    $('#eemployeeTab').unbind().click(function () {
+        console.log('employee tab clicked');
             employeeTabContent();
             //$(this).unbind();
         });
-        $('#aaddTab').unbind().click(function () {
+    $('#aaddTab').unbind().click(function () {
+        console.log('add tab clicked');
             addTabContent();
             //$(this).unbind();
         });
-        $('#eeditTab').unbind().click(function () {
+    $('#eeditTab').unbind().click(function () {
+        console.log('edit tab clicked');
             editTabContent();
             //$(this).unbind();
         });
-        $('#ddeleteTab').unbind().click(function () {
+    $('#ddeleteTab').unbind().click(function () {
+        console.log('delete tab clicked');
             deleteTabContent();
             //$(this).unbind();
         });
