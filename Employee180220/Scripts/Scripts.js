@@ -1,6 +1,5 @@
 ﻿$(document).ready(function () {
-
-	console.log('document ready main');
+	console.log('Document ready main');
     $('#lnkdashboard').unbind().click(function () {
         console.log('%c dashboard fired', 'background: #222; color: #FF0000');
         Dashboard();
@@ -41,34 +40,18 @@ var DeleteEmployee = function () {
 	$('#main').load('/Employee/DeleteEmployee');
 }
 
-function Delete(url) {
-	if (confirm('Are you sure to delete this record ?') == true) {
-		$.ajax({
-			type: 'POST',
-			url: url,
-			success: function (result) {
-                alert('Deleted!');
-                $('#main').load('/employee/deleteemployee');
-			},
-			async: true,
-			processData: false
-
-		});
-
-	}
-}
 
 
 
-function refreshTab(resetUrl) {
-	$.ajax({
-		type: "GET",
-		url: resetUrl,
-		success: function (result) {
-			alert('Refreshed!!');
-		},
-		async: true,
-		processData: false
+//function refreshTab(resetUrl) {
+//	$.ajax({
+//		type: "GET",
+//		url: resetUrl,
+//		success: function (result) {
+//			alert('Refreshed!!');
+//		},
+//		async: true,
+//		processData: false
 
-	});
-}
+//	});
+//}

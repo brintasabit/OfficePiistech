@@ -31,7 +31,7 @@
                 alert('Error: ' + xhr.statusText);
             },
             success: function (result) {
-                alert('Success');
+                $.notify("Successfull!", "success");
             },
             async: true,
             processData: false

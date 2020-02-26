@@ -3,7 +3,22 @@
 @{
     Layout = null;
 }
-
+<script>
+    var Delete = function(url) {
+        if (confirm('Are you sure to delete this record ?') == true) {
+            $.ajax({
+                type: 'POST',
+                url: url,
+                success: function (result) {
+                    $.notify("Deleted!", "success");
+                    $('#main').load('/employee/deleteemployee');
+                },
+                async: true,
+                processData: false
+            });
+        }
+    }
+</script>
     <meta name="viewport" content="width=device-width" />
     <title>Delete Employee</title>
     
