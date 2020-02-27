@@ -12,7 +12,6 @@ namespace Employee180220.Controllers
 {
     public class EmployeeController : Controller
     {
-        // GET: Employee
         public ActionResult Index()
         {
             return View();
@@ -38,8 +37,8 @@ namespace Employee180220.Controllers
         {
             using (DBModel dB = new DBModel())
             {
-                var employeeliSt = dB.EmployeeInfoes.ToList<EmployeeInfo>();
-                return employeeliSt;
+                var employeelist = dB.EmployeeInfoes.ToList<EmployeeInfo>();
+                return employeelist;
             }
 
         }
@@ -115,15 +114,32 @@ namespace Employee180220.Controllers
             }
         }
 
-        public JsonResult Search(int id)
+        public JsonResult SearchFunc(string SearchBy, string SearchValue)
         {
             using (DBModel dB = new DBModel())
             {
-                EmployeeInfo emp = dB.EmployeeInfoes.Where(x => x.EmployeeId == id).FirstOrDefault<EmployeeInfo>();
-                dB.EmployeeInfoes.Find(emp);
+                List<EmployeeInfo>emp=new List<EmployeeInfo>();
+                if (SearchBy=="Id")
+                {
+                    try
+                    {
+                        int Id = Convert.ToInt32(SearchValue);
+                        emp = dB.EmployeeInfoes.Where(x => x.EmployeeId == Id || SearchValue == null).ToList();
+                    }
+                    catch (FormatException)
+                    {
+                        Console.WriteLine("{0} Is Not A Id ", SearchValue);
+                    }
+                    return Json(emp, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    emp = dB.EmployeeInfoes.Where(x => x.Name.StartsWith(SearchValue) || SearchValue == null).ToList();
+                    return Json(emp, JsonRequestBehavior.AllowGet);
+                }
+                
             }
-            var json = Json(new { success = true, Message = "Found Successfully!" }, JsonRequestBehavior.AllowGet);
-            return json;
+
         }
     }
 }
