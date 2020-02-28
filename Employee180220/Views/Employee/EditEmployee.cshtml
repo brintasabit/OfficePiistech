@@ -5,35 +5,6 @@
 }
 <script>
 
-    //$('#update').click(function () {
-     
-    //    console.log('Update Emp clicked');
-    //    Edit();
-    //});
-    //var Edit = function () {
-        
-    //    var id = $(this).find("td:first-child").text();
-    //    //var id = $(this).data('jId');
-    //    console.log('ajax call');
-    //    $.ajax({
-    //        url: '/Employee/AddOrEdit',
-    //        type: 'POST',
-    //        //data: JSON.stringify(),
-    //        dataType: 'json',
-    //        data: {id: id},
-    //        contentType: 'application/json; charset=utf-8',
-    //        error: function (xhr) {
-    //            alert('Error: ' + xhr.statusText);
-    //        },
-    //        success: function (result) {
-                
-    //            $("#employeeTable").html(result);
-    //            console.log(result);
-    //        },
-    //        async: true,
-    //        processData: false
-    //    });
-    //}
     var Edit = function (url) {
         console.log('Ajax call');
         $.notify("Update Here", "success");
@@ -49,7 +20,7 @@
         
     }
     
-    //var Edit = function (id) {
+    //var Edit = function (jid) {
     //    //var requestData = {
     //    //    EmployeeId: $('#EmployeeId').val(),
     //    //    Name: $('#Name').val(),
@@ -62,18 +33,19 @@
     //    //}
         
     //    $.ajax({
-    //        url: '/Employee/AddOrEdit',
+    //        url: '/Employee/AddOrEdit?id='+jid,
     //        type: 'GET',
     //        //data: JSON.stringify(),
             
-    //        dataType: 'text',
+    //        dataType: 'html',
     //        contentType: 'application/json; charset=utf-8',
     //        error: function (xhr) {
     //            alert('Error: ' + xhr.statusText);
     //        },
     //        success: function (response) {
-    //            alert('Success');
-    //            $('#tabContent').load("/Employee/AddOrEdit?id=38");
+    //            $.notify("Update Here", "success");
+    //            //$('#tabContent').load("/Employee/AddOrEdit?id=");
+    //            $("#main").html(response);
     //            //$('#EmployeeId').val(),
     //            //    $('#Name').val(),
     //            //    $('#Age').val(),

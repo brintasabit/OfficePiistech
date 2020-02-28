@@ -11,11 +11,7 @@ namespace Employee180220.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Web;
-
+    
     public partial class EmployeeInfo
     {
         public int EmployeeId { get; set; }
@@ -26,11 +22,5 @@ namespace Employee180220.Models
         public Nullable<double> Salary { get; set; }
         public Nullable<bool> IsCurrentEmployee { get; set; }
         public string ImagePath { get; set; }
-        [NotMapped]
-        public HttpPostedFileBase ImageUpload { get; set; }
-        public EmployeeInfo()
-        {
-            ImagePath = "~/AppFiles/ImageFiles/Default.png";
-        }
     }
 }

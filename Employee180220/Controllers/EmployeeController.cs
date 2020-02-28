@@ -61,14 +61,14 @@ namespace Employee180220.Controllers
         {
             try
             {
-                if (emp.ImageUpload != null)
-                {
-                    var fileName = Path.GetFileNameWithoutExtension(emp.ImageUpload.FileName);
-                    var extension = Path.GetExtension(emp.ImageUpload.FileName);
-                    fileName = fileName + DateTime.Now.ToString("yy-MMM-dd ddd") + extension;
-                    emp.ImagePath = "~/AppFiles/ImageFiles/" + fileName;
-                    emp.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/AppFiles/ImageFiles/"), fileName));
-                }
+                //if (emp.ImageUpload != null)
+                //{
+                //    var fileName = Path.GetFileNameWithoutExtension(emp.ImageUpload.FileName);
+                //    var extension = Path.GetExtension(emp.ImageUpload.FileName);
+                //    fileName = fileName + DateTime.Now.ToString("yy-MMM-dd ddd") + extension;
+                //    emp.ImagePath = "~/AppFiles/ImageFiles/" + fileName;
+                //    emp.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/AppFiles/ImageFiles/"), fileName));
+                //}
                 using (DBModel db = new DBModel())
                 {
                     if (emp.EmployeeId == 0)
@@ -114,32 +114,32 @@ namespace Employee180220.Controllers
             }
         }
 
-        public JsonResult SearchFunc(string SearchBy, string SearchValue)
+        public JsonResult SearchFunc(string SearchText, string FilterBy)
         {
             using (DBModel dB = new DBModel())
             {
                 List<EmployeeInfo>emp=new List<EmployeeInfo>();
-                if (SearchBy=="Id")
+                if (!string.IsNullOrWhiteSpace(SearchText))
                 {
-                    try
+                    emp = dB.EmployeeInfoes.Where(x => x.Name.Contains(SearchText) || SearchText == null).ToList();
+                    int empid = 0;
+                    if (int.TryParse(SearchText, out empid))
                     {
-                        int Id = Convert.ToInt32(SearchValue);
-                        emp = dB.EmployeeInfoes.Where(x => x.EmployeeId == Id || SearchValue == null).ToList();
+                        emp = dB.EmployeeInfoes.Where(x => x.EmployeeId == empid).ToList();
+
                     }
-                    catch (FormatException)
-                    {
-                        Console.WriteLine("{0} Is Not A Id ", SearchValue);
-                    }
-                    return Json(emp, JsonRequestBehavior.AllowGet);
                 }
-                else
+
+                if (!string.IsNullOrWhiteSpace(FilterBy))
                 {
-                    emp = dB.EmployeeInfoes.Where(x => x.Name.StartsWith(SearchValue) || SearchValue == null).ToList();
-                    return Json(emp, JsonRequestBehavior.AllowGet);
+                    bool filter = Convert.ToBoolean(FilterBy);
+                    emp = dB.EmployeeInfoes.Where(x => x.IsCurrentEmployee==filter).ToList();
                 }
-                
+                return Json(emp, JsonRequestBehavior.AllowGet);
             }
 
         }
+
+
     }
 }

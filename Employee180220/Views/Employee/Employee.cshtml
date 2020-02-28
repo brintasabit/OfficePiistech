@@ -12,28 +12,28 @@
     //    });
     //});
 
-        //var Search = function (url) {
-        //    console.log('Ajax call');
-        //    $.notify("Found!", "success");
-        //    $.ajax({
-        //        type: 'GET',
-        //        url: url,
-        //        success: function (response) {
-        //            $("#main").html(response);
-                
-        //        }
+    //var Search = function (url) {
+    //    console.log('Ajax call');
+    //    $.notify("Found!", "success");
+    //    $.ajax({
+    //        type: 'GET',
+    //        url: url,
+    //        success: function (response) {
+    //            $("#main").html(response);
 
-        //    });
-        
-        //}
+    //        }
+
+    //    });
+
+    //}
 
     $('#button2').unbind().click(function () {
         console.log('Button clicked');
         AddEmployee();
-        
+
     });
     var AddEmployee = function () {
-	
+
         $('#main').load('/Employee/AddOrEdit');
     }
 
@@ -42,46 +42,50 @@
     //    $(this).closest('.select-outline').find('label').toggleClass('active');
     //    $(this).closest('.select-outline').find('.caret').toggleClass('active');
     //});
-    $('#tableSearch').unbind().click(function () {
-        console.log('Search Button clicked');
+    var searchEmployee = function() {
+        var SearchText = $("#Search").val();
+        var FilterBy = $("#FilterBy").val();
         
-        var SearchBy = $("#SearchBy").val();
-        var SearchValue = $("#Search").val();
         var Data = $("#tableSrch");
         Data.html("");
-            $.ajax({
-                url: '/Employee/SearchFunc?SearchBy='+SearchBy+"&SearchValue="+SearchValue,
-                type: 'POST',
-                contentType: 'html',
-                error: function (xhr) {
-                    alert('Error: ' + xhr.statusText);
-                },
-                success: function (result) {
-                    if (result.length == 0) {
-                        $.notify("No Match Data!");
-                    } else {
-                        $.notify("Data Found!","success");
-                        $.each(result,
-                            function(index,value) {
-                                var tableData = "<tr>" +
-                                    "<td>" + value.EmployeeId + "</td>" +
-                                    "<td>" + value.Name + "</td>" +
-                                    "<td>" + value.Age + "</td>" +
-                                    "<td>" + value.Office + "</td>" +
-                                    "<td>" + value.Position + "</td>" +
-                                    "<td>" + value.Salary + "</td>" +
-                                    "<td>" + value.IsCurrentEmployee + "</td>" +
-                                    "</tr>";
-                                Data.append(tableData);
-                            });
-                    }
+        $.ajax({
+            url: '/Employee/SearchFunc?SearchText=' + SearchText + "&FilterBy=" + FilterBy,
+            type: 'POST',
+            contentType: 'html',
+            error: function (xhr) {
+                alert('Error: ' + xhr.statusText);
+            },
+            success: function (result) {
+                if (result.length == 0) {
+                    $.notify("Data not exists!");
+                } else {
+                    $.notify("Data Found!", "success");
+                    $.each(result, function (index, value) {
+                        var tableData = "<tr>" +
+                            "<td>" + value.EmployeeId + "</td>" +
+                            "<td>" + value.Name + "</td>" +
+                            "<td>" + value.Age + "</td>" +
+                            "<td>" + value.Office + "</td>" +
+                            "<td>" + value.Position + "</td>" +
+                            "<td>" + value.Salary + "</td>" +
+                            "<td>" + value.IsCurrentEmployee + "</td>" +
+                            "</tr>";
+                        Data.append(tableData);
+                    });
+                }
 
-                },
-                async: true,
-                processData: false
-            });
-
-
+            },
+            async: true,
+            processData: false
+        });
+    }
+    $('#Search').unbind().keyup(function () {
+        console.log('Search Button clicked');
+        searchEmployee();     
+    });
+    $('#FilterBy').unbind().change(function () {
+        console.log('Filter clicked');
+        searchEmployee();
     });
 
 
@@ -103,11 +107,14 @@
 
     #employeeData.employeeData {
         position: absolute;
-        
         width: 97%;
         height: 500px;
     }
 
+    #Search.form-control {
+        position: absolute;
+        width: 50%;
+    }
 </style>
 <meta name="viewport" content="width=device-width" />
 
@@ -117,12 +124,20 @@
 <div id="button2" class="btnButton1">
     <button type="submit" class="btn btn-success"><i class="material-icons">person_add</i>Add Employee</button>
 </div>
-<b>Search By : </b>
-<select id="SearchBy">
-    <option value="Name">Name</option>
-    <option value="Id">Id</option>
-</select><br/><br />
-@Html.TextBox("Search")<input id="tableSearch" type="submit" value="Search"><br /><br />
+
+<b>Filter By : </b>
+<select id="FilterBy">
+    <option value="True">True</option>
+    <option value="False">False</option>
+</select><br /><br />
+
+@*@Html.TextBox("Search")<i class="material-icons" id="tableSearch" type="submit" value="Search">search</i><br /><br />*@
+@*<form class="form-inline ">
+        <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search" aria-label="Search" id="Search">
+        <i class="fas fa-search" aria-hidden="true" id="tableSearch" type="submit" value="Search"></i>
+    </form>*@
+@*<input id="tableSearch" type="submit" value="Search"><br /><br />*@
+<input class="form-control" type="text" placeholder="Search" aria-label="Search" id="Search"><br /><br />
 <div id="employeeData" class="employeeData">
 
 
@@ -131,54 +146,54 @@
 
 
     @*<div class="col-md-6 select-outline">
-        <select class="mdb-select md-form md-outline colorful-select dropdown-primary">
-            <option value="" selected>Choose your option</option>
-            <option value="1">True</option>
-            <option value="2">False</option>
-        </select>
-        <label><i class="material-icons">search</i></label>
+            <select class="mdb-select md-form md-outline colorful-select dropdown-primary">
+                <option value="" selected>Choose your option</option>
+                <option value="1">True</option>
+                <option value="2">False</option>
+            </select>
+            <label><i class="material-icons">search</i></label>
 
-    </div>*@
+        </div>*@
 
     <table class="table table-bordered" id="employeeTable">
         <thead class="thead-dark">
-        <tr>
-            <th>Employee Id</th>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Office</th>
-            <th>Position</th>
-            <th>Salary</th>
-            <th>Is Current Employee</th>
-        </tr>
+            <tr>
+                <th>Employee Id</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Office</th>
+                <th>Position</th>
+                <th>Salary</th>
+                <th>Is Current Employee</th>
+            </tr>
         </thead>
         <tbody id="tableSrch">
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EmployeeId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Age)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Office)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Position)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Salary)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IsCurrentEmployee)
-                </td>
-            </tr>
-        }
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EmployeeId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Age)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Office)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Position)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Salary)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsCurrentEmployee)
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
 </div>
