@@ -114,7 +114,7 @@ namespace Employee180220.Controllers
             }
         }
 
-        public JsonResult SearchFunc(string SearchText, string FilterBy)
+        public JsonResult SearchFunc2(string SearchText, string FilterBy)
         {
             using (DBModel dB = new DBModel())
             {
@@ -122,12 +122,7 @@ namespace Employee180220.Controllers
                 if (!string.IsNullOrWhiteSpace(SearchText))
                 {
                     emp = dB.EmployeeInfoes.Where(x => x.Name.Contains(SearchText) || SearchText == null).ToList();
-                    int empid = 0;
-                    if (int.TryParse(SearchText, out empid))
-                    {
-                        emp = dB.EmployeeInfoes.Where(x => x.EmployeeId == empid).ToList();
 
-                    }
                 }
 
                 if (!string.IsNullOrWhiteSpace(FilterBy))
@@ -140,6 +135,45 @@ namespace Employee180220.Controllers
 
         }
 
+        public JsonResult SearchFunc(string SearchText, string FilterBy)
+        {
+            
+            using (DBModel dB=new DBModel())
+            {
+                List<EmployeeInfo> emp = new List<EmployeeInfo>();
+                //List<EmployeeInfo> emp2 = new List<EmployeeInfo>();
+
+
+                if (!String.IsNullOrWhiteSpace(SearchText))
+                {
+                    emp = dB.EmployeeInfoes.Where(x => x.Name.Contains(SearchText)).ToList();
+                }
+                if (!String.IsNullOrWhiteSpace(FilterBy))
+                {
+                    bool filter = Convert.ToBoolean(FilterBy);
+
+                    emp = dB.EmployeeInfoes.Where(x => x.IsCurrentEmployee == filter).ToList();
+                    
+                    
+                }
+                //if (!string.IsNullOrWhiteSpace(FilterBy))
+                //{
+                //    bool filter = Convert.ToBoolean(FilterBy);
+                //    emp = dB.EmployeeInfoes.Where(x => x.IsCurrentEmployee == filter).ToList();
+                //}
+                //return Json(emp2, JsonRequestBehavior.AllowGet);
+
+
+
+
+
+
+
+
+            return Json(emp, JsonRequestBehavior.AllowGet);
+            }
+            
+        }
 
     }
 }

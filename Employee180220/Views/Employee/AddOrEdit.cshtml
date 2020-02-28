@@ -23,7 +23,14 @@
         }
             
     });
+    //$('#IsCurrentEmployee').click(function () {
+    //    console.log('Checkbox clicked');
+    //    IsCurrentEmployee();
+        
+    //});
+    //var IsCurrentEmployee = function() {
 
+    //}
     $('#saveEmp').click(function () {
         console.log('Save Emp clicked');
         AddOrEditEmployee();
@@ -147,7 +154,7 @@
                     <div class="w3-half">
                         <label>Is Current Employee?</label>
                         <input class="w3-input w3-border" type="checkbox" id="IsCurrentEmployee">
-                        @*@Html.EditorFor(model => model.IsCurrentEmployee, "", new { @class = "text-danger" })*@
+                        @*@Html.CheckBoxFor(m=>m.IsCurrentEmployee)*@
                     </div>
 
 

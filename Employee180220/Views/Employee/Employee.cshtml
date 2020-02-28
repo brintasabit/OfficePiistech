@@ -42,14 +42,23 @@
     //    $(this).closest('.select-outline').find('label').toggleClass('active');
     //    $(this).closest('.select-outline').find('.caret').toggleClass('active');
     //});
-    var searchEmployee = function() {
+    $('#Search').unbind().keyup(function () {
+        console.log('Search Button clicked');
+        SearchEmployee();     
+    });
+    $('#FilterBy').unbind().click(function () {
+        console.log('Filter clicked');
+        SearchEmployee();
+    });
+    var SearchEmployee = function() {
         var SearchText = $("#Search").val();
         var FilterBy = $("#FilterBy").val();
         
         var Data = $("#tableSrch");
         Data.html("");
         $.ajax({
-            url: '/Employee/SearchFunc?SearchText=' + SearchText + "&FilterBy=" + FilterBy,
+            url: '/Employee/SearchFunc?SearchText='+ SearchText + "&FilterBy=" + FilterBy,
+            
             type: 'POST',
             contentType: 'html',
             error: function (xhr) {
@@ -79,14 +88,7 @@
             processData: false
         });
     }
-    $('#Search').unbind().keyup(function () {
-        console.log('Search Button clicked');
-        searchEmployee();     
-    });
-    $('#FilterBy').unbind().change(function () {
-        console.log('Filter clicked');
-        searchEmployee();
-    });
+
 
 
 </script>
@@ -107,8 +109,10 @@
 
     #employeeData.employeeData {
         position: absolute;
+        
+        height: 310px;
         width: 97%;
-        height: 500px;
+        
     }
 
     #Search.form-control {
@@ -127,6 +131,7 @@
 
 <b>Filter By : </b>
 <select id="FilterBy">
+    <option value="">Select</option>
     <option value="True">True</option>
     <option value="False">False</option>
 </select><br /><br />
