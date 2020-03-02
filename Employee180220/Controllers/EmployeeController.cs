@@ -132,18 +132,6 @@ namespace Employee180220.Controllers
                         emp = dB.EmployeeInfoes.Where(x => x.Name.Contains(SearchText)).ToList();
                     }              
                 }
-                //else
-                //{
-                //    if (!string.IsNullOrEmpty(FilterBy))
-                //    {
-                //        bool filter = Convert.ToBoolean(FilterBy);
-                //        emp = dB.EmployeeInfoes.Where(x => x.Name.Contains(SearchText) && x.IsCurrentEmployee == filter).ToList();
-                //    }
-                //    else
-                //    {
-                //        emp = dB.EmployeeInfoes.ToList();
-                //    }
-                //}
                 return Json(emp, JsonRequestBehavior.AllowGet);
 
             }
