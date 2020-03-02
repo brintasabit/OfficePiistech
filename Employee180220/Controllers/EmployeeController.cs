@@ -114,63 +114,38 @@ namespace Employee180220.Controllers
             }
         }
 
-        public JsonResult SearchFunc2(string SearchText, string FilterBy)
-        {
-            using (DBModel dB = new DBModel())
-            {
-                List<EmployeeInfo>emp=new List<EmployeeInfo>();
-                if (!string.IsNullOrWhiteSpace(SearchText))
-                {
-                    emp = dB.EmployeeInfoes.Where(x => x.Name.Contains(SearchText) || SearchText == null).ToList();
-
-                }
-
-                if (!string.IsNullOrWhiteSpace(FilterBy))
-                {
-                    bool filter = Convert.ToBoolean(FilterBy);
-                    emp = dB.EmployeeInfoes.Where(x => x.IsCurrentEmployee==filter).ToList();
-                }
-                return Json(emp, JsonRequestBehavior.AllowGet);
-            }
-
-        }
-
         public JsonResult SearchFunc(string SearchText, string FilterBy)
         {
-            
+           
             using (DBModel dB=new DBModel())
             {
                 List<EmployeeInfo> emp = new List<EmployeeInfo>();
-                //List<EmployeeInfo> emp2 = new List<EmployeeInfo>();
-
-
                 if (!String.IsNullOrWhiteSpace(SearchText))
                 {
-                    emp = dB.EmployeeInfoes.Where(x => x.Name.Contains(SearchText)).ToList();
+                    if (!String.IsNullOrWhiteSpace(FilterBy))
+                    {
+                        bool filter = Convert.ToBoolean(FilterBy);
+                        emp = dB.EmployeeInfoes.Where(x => x.Name.Contains(SearchText) && x.IsCurrentEmployee == filter).ToList();
+                    }
+                    else
+                    {
+                        emp = dB.EmployeeInfoes.Where(x => x.Name.Contains(SearchText)).ToList();
+                    }              
                 }
-                if (!String.IsNullOrWhiteSpace(FilterBy))
-                {
-                    bool filter = Convert.ToBoolean(FilterBy);
-
-                    emp = dB.EmployeeInfoes.Where(x => x.IsCurrentEmployee == filter).ToList();
-                    
-                    
-                }
-                //if (!string.IsNullOrWhiteSpace(FilterBy))
+                //else
                 //{
-                //    bool filter = Convert.ToBoolean(FilterBy);
-                //    emp = dB.EmployeeInfoes.Where(x => x.IsCurrentEmployee == filter).ToList();
+                //    if (!string.IsNullOrEmpty(FilterBy))
+                //    {
+                //        bool filter = Convert.ToBoolean(FilterBy);
+                //        emp = dB.EmployeeInfoes.Where(x => x.Name.Contains(SearchText) && x.IsCurrentEmployee == filter).ToList();
+                //    }
+                //    else
+                //    {
+                //        emp = dB.EmployeeInfoes.ToList();
+                //    }
                 //}
-                //return Json(emp2, JsonRequestBehavior.AllowGet);
+                return Json(emp, JsonRequestBehavior.AllowGet);
 
-
-
-
-
-
-
-
-            return Json(emp, JsonRequestBehavior.AllowGet);
             }
             
         }

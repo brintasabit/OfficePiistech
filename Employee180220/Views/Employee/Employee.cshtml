@@ -12,20 +12,6 @@
     //    });
     //});
 
-    //var Search = function (url) {
-    //    console.log('Ajax call');
-    //    $.notify("Found!", "success");
-    //    $.ajax({
-    //        type: 'GET',
-    //        url: url,
-    //        success: function (response) {
-    //            $("#main").html(response);
-
-    //        }
-
-    //    });
-
-    //}
 
     $('#button2').unbind().click(function () {
         console.log('Button clicked');
@@ -37,56 +23,68 @@
         $('#main').load('/Employee/AddOrEdit');
     }
 
-    //$('.mdb-select').materialSelect();
-    //$('.select-wrapper.md-form.md-outline input.select-dropdown').bind('focus blur', function () {
-    //    $(this).closest('.select-outline').find('label').toggleClass('active');
-    //    $(this).closest('.select-outline').find('.caret').toggleClass('active');
-    //});
     $('#Search').unbind().keyup(function () {
         console.log('Search Button clicked');
         SearchEmployee();     
     });
-    $('#FilterBy').unbind().click(function () {
+    $('#FilterBy').unbind().change(function () {
         console.log('Filter clicked');
         SearchEmployee();
     });
     var SearchEmployee = function() {
-        var SearchText = $("#Search").val();
-        var FilterBy = $("#FilterBy").val();
+        var searchText = $("#Search").val();
+        var filterBy = $("#FilterBy").val();
         
-        var Data = $("#tableSrch");
-        Data.html("");
+        var data = $("#TableSrch");
+        data.html("");
+
         $.ajax({
-            url: '/Employee/SearchFunc?SearchText='+ SearchText + "&FilterBy=" + FilterBy,
-            
+            url: '/Employee/SearchFunc?SearchText=' + searchText + "&FilterBy=" + filterBy,
+
             type: 'POST',
             contentType: 'html',
-            error: function (xhr) {
+            error: function(xhr) {
                 alert('Error: ' + xhr.statusText);
             },
-            success: function (result) {
+            success: function(result) {
                 if (result.length == 0) {
                     $.notify("Data not exists!");
                 } else {
                     $.notify("Data Found!", "success");
-                    $.each(result, function (index, value) {
-                        var tableData = "<tr>" +
-                            "<td>" + value.EmployeeId + "</td>" +
-                            "<td>" + value.Name + "</td>" +
-                            "<td>" + value.Age + "</td>" +
-                            "<td>" + value.Office + "</td>" +
-                            "<td>" + value.Position + "</td>" +
-                            "<td>" + value.Salary + "</td>" +
-                            "<td>" + value.IsCurrentEmployee + "</td>" +
-                            "</tr>";
-                        Data.append(tableData);
-                    });
+                    $.each(result,
+                        function(index, value) {
+                            var tableData = "<tr>" +
+                                "<td>" +
+                                value.EmployeeId +
+                                "</td>" +
+                                "<td>" +
+                                value.Name +
+                                "</td>" +
+                                "<td>" +
+                                value.Age +
+                                "</td>" +
+                                "<td>" +
+                                value.Office +
+                                "</td>" +
+                                "<td>" +
+                                value.Position +
+                                "</td>" +
+                                "<td>" +
+                                value.Salary +
+                                "</td>" +
+                                "<td>" +
+                                value.IsCurrentEmployee +
+                                "</td>" +
+                                "</tr>";
+                            data.append(tableData);
+                        });
                 }
 
             },
             async: true,
             processData: false
-        });
+            
+    });
     }
 
 
@@ -136,29 +134,9 @@
     <option value="False">False</option>
 </select><br /><br />
 
-@*@Html.TextBox("Search")<i class="material-icons" id="tableSearch" type="submit" value="Search">search</i><br /><br />*@
-@*<form class="form-inline ">
-        <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search" aria-label="Search" id="Search">
-        <i class="fas fa-search" aria-hidden="true" id="tableSearch" type="submit" value="Search"></i>
-    </form>*@
-@*<input id="tableSearch" type="submit" value="Search"><br /><br />*@
 <input class="form-control" type="text" placeholder="Search" aria-label="Search" id="Search"><br /><br />
 <div id="employeeData" class="employeeData">
 
-
-    @*<button type="submit" class="btn btn-success" onclick="Search('@Url.Action("Search", "Employee", new {id = #tableSearch})')"><i class="material-icons">search</i>Search</button>*@
-
-
-
-    @*<div class="col-md-6 select-outline">
-            <select class="mdb-select md-form md-outline colorful-select dropdown-primary">
-                <option value="" selected>Choose your option</option>
-                <option value="1">True</option>
-                <option value="2">False</option>
-            </select>
-            <label><i class="material-icons">search</i></label>
-
-        </div>*@
 
     <table class="table table-bordered" id="employeeTable">
         <thead class="thead-dark">
@@ -172,7 +150,7 @@
                 <th>Is Current Employee</th>
             </tr>
         </thead>
-        <tbody id="tableSrch">
+        <tbody id="TableSrch">
             @foreach (var item in Model)
             {
                 <tr>
