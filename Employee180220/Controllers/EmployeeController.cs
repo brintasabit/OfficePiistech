@@ -133,10 +133,7 @@ namespace Employee180220.Controllers
                     }              
                 }
                 return Json(emp, JsonRequestBehavior.AllowGet);
-
-            }
-            
+            }            
         }
-
     }
 }

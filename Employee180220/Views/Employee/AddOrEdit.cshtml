@@ -15,26 +15,19 @@
 
     //    }
     //}
-    $('#IsCurrentEmployee').change(function(){
+    $('#IsCurrentEmployee').change(function () {
         if (this.checked) {
             $('#IsCurrentEmployee').val('True');
         } else {
             $('#IsCurrentEmployee').val('False');
         }
-            
     });
-    //$('#IsCurrentEmployee').click(function () {
-    //    console.log('Checkbox clicked');
-    //    IsCurrentEmployee();
-        
-    //});
-    //var IsCurrentEmployee = function() {
 
-    //}
+
+
     $('#saveEmp').click(function () {
         console.log('Save Emp clicked');
         AddOrEditEmployee();
-        
     });
     var AddOrEditEmployee = function () {
         var requestData = {
@@ -47,6 +40,8 @@
             IsCurrentEmployee: $('#IsCurrentEmployee').val(),
             ImagePath: $('#ImagePath').val()
         };
+
+
         $.ajax({
             url: '/Employee/AddOrEdit',
             type: 'POST',
@@ -57,8 +52,18 @@
                 alert('Error: ' + xhr.statusText);
             },
             success: function (result) {
-                $.notify("Successfull!", "success");
-                $('#main').load('/Employee/Employee');
+                swal({
+                        icon: 'success',
+                        title: 'Thank You',
+                        text: 'Check your status on this page!',
+                        showConfirmButton: false,
+                    timer: 2500,
+                        button:false
+                    });
+                    $.notify("Successfull!", "success");
+                    $('#main').load('/Employee/Employee');
+                
+
             },
             async: true,
             processData: false
@@ -89,13 +94,11 @@
         left: 54%;
         top: 67%;
     }
-    col-md-8{
+
+    .sweet-alert {
         position: fixed;
-        height: 50px;
-        width: 50px;
-        left: 90%;
-        
-        margin: 10px;
+        height: 300px;
+        background: aqua;
     }
 </style>
 
@@ -153,7 +156,7 @@
 
                     <div class="w3-half">
                         <label>Is Current Employee?</label>
-                        <input class="w3-input w3-border" type="checkbox" id="IsCurrentEmployee">
+                        <input class="w3-input w3-border" type="checkbox" id="IsCurrentEmployee" checked="checked" value="@Model.IsCurrentEmployee">
                         @*@Html.CheckBoxFor(m=>m.IsCurrentEmployee)*@
                     </div>
 
@@ -167,18 +170,39 @@
 
                 </div>
                 @*<div id="image" class="col-md-6">
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.ImagePath, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-8">
-                            <img src="@Url.Content(Model.ImagePath)" id="imagePreview" />
-                            <input type="file" name="ImageUpload" accept="image/jpeg, image/png" onchange="ShowImagePreview(this,document.getElementById('imagePreview'))" />
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ImagePath, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-8">
+                                <img src="@Url.Content(Model.ImagePath)" id="imagePreview" />
+                                <input type="file" name="ImageUpload" accept="image/jpeg, image/png" onchange="ShowImagePreview(this,document.getElementById('imagePreview'))" />
+                            </div>
                         </div>
-                    </div>
-                </div>*@
+                    </div>*@
 
             </div>
 
         </div>
 
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Thank You</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Check Employee Table To Check Status..
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
     </div>
 </div>

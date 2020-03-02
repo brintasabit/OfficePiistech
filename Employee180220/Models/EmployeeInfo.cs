@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations;
+
 namespace Employee180220.Models
 {
     using System;
@@ -15,6 +17,7 @@ namespace Employee180220.Models
     public partial class EmployeeInfo
     {
         public int EmployeeId { get; set; }
+        //[Required(ErrorMessage = "Name Required!")]
         public string Name { get; set; }
         public Nullable<int> Age { get; set; }
         public string Office { get; set; }
