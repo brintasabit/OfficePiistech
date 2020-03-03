@@ -86,7 +86,15 @@
             
     });
     }
-
+    console.log("function fired");
+    $(function() {
+        var empTemplate = $("#hbTemplate").html();
+        var sourceHtml = Handlebars.compile(empTemplate);
+        $.post("@Url.Action("HbJs")", "", function(data) {
+            $("#employeeData").html(sourceHtml(data));
+        },"json");
+    });
+    $.notify("Handlebar Js!", "success");
 
 
 </script>
@@ -117,6 +125,11 @@
         position: absolute;
         width: 50%;
     }
+    #empTb.empTb {
+        background: black;
+        color: white;
+        text-align: center;
+    }
 </style>
 <meta name="viewport" content="width=device-width" />
 
@@ -138,49 +151,35 @@
 <div id="employeeData" class="employeeData">
 
 
-    <table class="table table-bordered" id="employeeTable">
-        <thead class="thead-dark">
-            <tr>
-                <th>Employee Id</th>
-                <th>Name</th>
-                <th>Age</th>
-                <th>Office</th>
-                <th>Position</th>
-                <th>Salary</th>
-                <th>Is Current Employee</th>
-            </tr>
-        </thead>
-        <tbody id="TableSrch">
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EmployeeId)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Age)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Office)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Position)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Salary)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.IsCurrentEmployee)
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <script type="text/x-handlebars-template" id="hbTemplate">
+
+       <table class="table table-bordered" id="employeeTable">
+           <thead id="empTb" class="empTb">
+               <tr>
+                   <td>Employee Id</td>
+                   <td>Name</td>
+                   <td>Age</td>
+                   <td>Office</td>
+                   <td>Position</td>
+                   <td>Salary</td>
+                   <td>Employee Status</td>
+               </tr>
+           </thead>
+           <tbody>
+               {{#EmployeeInfoes}}
+               <tr>
+                   <td>{{EmployeeId}}</td>
+                   <td>{{Name}}</td>
+                   <td>{{Age}}</td>
+                   <td>{{Office}}</td>
+                   <td>{{Position}}</td>
+                   <td>{{Salary}}</td>
+                   <td>{{IsCurrentEmployee}}</td>
+               </tr>
+               {{/EmployeeInfoes}}
+           </tbody>
+
+       </table>
+
+   </script>
 </div>
-
-
-
-

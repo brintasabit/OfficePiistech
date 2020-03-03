@@ -30,7 +30,9 @@ namespace EmployeeHBJS.Controllers
         }
         public JsonResult HbJs()
         {
-            return Json(new {EmployeeInfoes=GetAllEmployee()});
+            var employeeInfos = GetAllEmployee();
+
+            return Json(new {EmployeeInfoes= employeeInfos });
         }
     }
 }

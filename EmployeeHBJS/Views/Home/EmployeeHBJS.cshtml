@@ -40,14 +40,16 @@
 
 <script type="text/javascript">
     console.log("function fired");
-    $(function() {
+    $(function () {
         var empTemplate = $("#hbTemplate").html();
         var sourceHtml = Handlebars.compile(empTemplate);
-        $.post("@Url.Action("HbJs")", "", function(data) {
-            $("#hBDiv").html(sourceHtml(data));
-        },"json");
-    });
-    $.notify("Handlebar Js!", "success");
+        /**/
+        $.post("/Home/HbJs", "", function (data) {
+        /**/
+        $("#hBDiv").html(sourceHtml(data));
+    }, "json");
+});
+$.notify("Handlebar Js!", "success");
 </script>
 <div id="hBDiv">
 

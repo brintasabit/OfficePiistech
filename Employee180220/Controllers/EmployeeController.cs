@@ -135,5 +135,9 @@ namespace Employee180220.Controllers
                 return Json(emp, JsonRequestBehavior.AllowGet);
             }            
         }
+        public JsonResult HbJs()
+        {
+            return Json(new { EmployeeInfoes = GetAllEmployee() });
+        }
     }
 }
