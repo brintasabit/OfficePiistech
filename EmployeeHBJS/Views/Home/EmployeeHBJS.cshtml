@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "EmployeeHBJS";
+}
+
+    
+
+    <script type="text/x-handlebars-template" id="hbTemplate">
+        
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <td>Employee Id</td>
+                    <td>Name</td>
+                    <td>Email</td>
+                </tr>
+            </thead>
+            <tbody>
+                {{#EmployeeInfoes}}
+                <tr>
+                    <td>{{EmpId}}</td>
+                    <td>{{Name}}</td>
+                    <td>{{Email}}</td>
+                </tr>
+                {{/EmployeeInfoes}}
+            </tbody>
+
+        </table>
+
+    </script>
+
+
+<h2>Employee Infoes With HBJS</h2>
+
+<script type="text/javascript">
+    
+    $(function() {
+        var empTemplate = $("#hbTemplate").html();
+        var sourceHtml = Handlebars.compile(empTemplate);
+        $.post("@Url.Action("HbJs")", "", function(data) {
+            $("#hBDiv").html(sourceHtml(data));
+        },"json");
+    });
+    $.notify("Handlebar Js!", "success");
+</script>
+<div id="hBDiv">
+
+</div>

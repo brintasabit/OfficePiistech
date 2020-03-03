@@ -1,0 +1,78 @@
+﻿@model IEnumerable<EmployeeHBJS.Models.EmployeeInfo>
+@{
+    ViewBag.Title = "Home Page";
+}
+<script>
+    $("#Search").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $("#employeeTable *").filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+</script>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        text-decoration: none;
+    }
+
+    .btnButton1 {
+        position: fixed;
+        float: right;
+        top: 13%;
+        right: 1%;
+    }
+
+    #employeeData.employeeData {
+        position: absolute;
+        height: 310px;
+        width: 90%;
+    }
+
+    #Search.form-control {
+        position: absolute;
+        width: 50%;
+    }
+</style>
+<meta name="viewport" content="width=device-width" />
+
+<title>Employee</title>
+
+<h2>Employees Information</h2>
+<br/>
+<input class="form-control" type="text" placeholder="Search" aria-label="Search" id="Search"><br /><br />
+<div id="employeeData" class="employeeData">
+
+
+    <table class="table table-bordered" id="employeeTable">
+        <thead class="thead-dark">
+            <tr>
+                <th>Employee Id</th>
+                <th>Name</th>
+                <th>E-Mail</th>
+            </tr>
+        </thead>
+        <tbody id="TableSrch">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EmpId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
+
