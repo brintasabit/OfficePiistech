@@ -3,12 +3,18 @@
     ViewBag.Title = "EmployeeHBJS";
 }
 
-    
+<style>
+    #empTb.empTb {
+        background: black;
+        color: white;
+        text-align: center;
+    }
+</style>   
 
     <script type="text/x-handlebars-template" id="hbTemplate">
-        
+
         <table class="table table-bordered">
-            <thead class="thead-dark">
+            <thead id="empTb"class="empTb">
                 <tr>
                     <td>Employee Id</td>
                     <td>Name</td>
@@ -26,14 +32,14 @@
             </tbody>
 
         </table>
-
+        
     </script>
 
 
 <h2>Employee Infoes With HBJS</h2>
 
 <script type="text/javascript">
-    
+    console.log("function fired");
     $(function() {
         var empTemplate = $("#hbTemplate").html();
         var sourceHtml = Handlebars.compile(empTemplate);
