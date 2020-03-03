@@ -11,27 +11,33 @@
     }
 </style>   
 
-    <script type="text/x-handlebars-template" id="hbTemplate">
+<script type="text/x-handlebars-template" id="hbTemplate">
 
-        <table class="table table-bordered">
-            <thead id="empTb"class="empTb">
-                <tr>
-                    <td>Employee Id</td>
-                    <td>Name</td>
-                    <td>Email</td>
-                </tr>
-            </thead>
-            <tbody>
-                {{#EmployeeInfoes}}
-                <tr>
-                    <td>{{EmpId}}</td>
-                    <td>{{Name}}</td>
-                    <td>{{Email}}</td>
-                </tr>
-                {{/EmployeeInfoes}}
-            </tbody>
+    <table class="table table-bordered">
+        <thead id="empTb" class="empTb">
+            <tr>
+                <td>Employee Id</td>
+                <td>Name</td>
+                <td>Email</td>
+                <td>Name&Email</td>
+            </tr>
+        </thead>
+        <tbody>
+            
+            {{#EmployeeInfoes}}
+            <tr>
 
-        </table>
+                <td>{{EmpId}}</td>
+                <td>{{UpperCase Name}}</td>
+                <td>{{Email}}</td>
+                <td>{{Calculate Name Email}}</td>
+
+            </tr>
+            {{/EmployeeInfoes}}
+           
+        </tbody>
+
+    </table>
         
     </script>
 
@@ -40,12 +46,25 @@
 
 <script type="text/javascript">
     console.log("function fired");
+    Handlebars.registerHelper('UpperCase', function(aString) {
+            return aString.toUpperCase();
+    });
+    Handlebars.registerHelper("Calculate", function(a, b) {
+        var c = a + b;
+        return c;
+    });
+    Handlebars.registerHelper("if", function(a, b) {
+        if (a == b ) {
+            
+        }
+        return c;
+    });
+
     $(function () {
+        
         var empTemplate = $("#hbTemplate").html();
         var sourceHtml = Handlebars.compile(empTemplate);
-        /**/
         $.post("/Home/HbJs", "", function (data) {
-        /**/
         $("#hBDiv").html(sourceHtml(data));
     }, "json");
 });
