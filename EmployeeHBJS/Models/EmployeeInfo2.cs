@@ -12,7 +12,7 @@ namespace EmployeeHBJS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class EmployeeInfo
+    public partial class EmployeeInfo2
     {
         public int EmpId { get; set; }
         public string Name { get; set; }

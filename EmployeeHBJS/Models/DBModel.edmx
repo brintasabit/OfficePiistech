@@ -5,32 +5,32 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="EmpHandleBarJs030320Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="EmployeeInfo">
+        <EntityType Name="EmployeeInfo2">
           <Key>
             <PropertyRef Name="EmpId" />
           </Key>
           <Property Name="EmpId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" />
-          <Property Name="Email" Type="varchar(max)" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityContainer Name="EmpHandleBarJs030320ModelStoreContainer">
-          <EntitySet Name="EmployeeInfo" EntityType="Self.EmployeeInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeeInfo2" EntityType="Self.EmployeeInfo2" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="EmpHandleBarJs030320Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="EmployeeInfo">
+        <EntityType Name="EmployeeInfo2">
           <Key>
             <PropertyRef Name="EmpId" />
           </Key>
           <Property Name="EmpId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityContainer Name="DBModel" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="EmployeeInfoes" EntityType="Self.EmployeeInfo" />
+          <EntitySet Name="EmployeeInfo2" EntityType="Self.EmployeeInfo2" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -38,9 +38,9 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="EmpHandleBarJs030320ModelStoreContainer" CdmEntityContainer="DBModel">
-          <EntitySetMapping Name="EmployeeInfoes">
-            <EntityTypeMapping TypeName="EmpHandleBarJs030320Model.EmployeeInfo">
-              <MappingFragment StoreEntitySet="EmployeeInfo">
+          <EntitySetMapping Name="EmployeeInfo2">
+            <EntityTypeMapping TypeName="EmpHandleBarJs030320Model.EmployeeInfo2">
+              <MappingFragment StoreEntitySet="EmployeeInfo2">
                 <ScalarProperty Name="EmpId" ColumnName="EmpId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Email" ColumnName="Email" />

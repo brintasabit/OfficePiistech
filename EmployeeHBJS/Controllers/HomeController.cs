@@ -14,11 +14,11 @@ namespace EmployeeHBJS.Controllers
             return View(GetAllEmployee());
         }
 
-        IEnumerable<EmployeeInfo> GetAllEmployee()
+        IEnumerable<EmployeeInfo2> GetAllEmployee()
         {
             using (DBModel dB = new DBModel())
             {
-                var employeelist = dB.EmployeeInfoes.ToList<EmployeeInfo>();
+                var employeelist = dB.EmployeeInfo2.ToList<EmployeeInfo2>();
                 return employeelist;
             }
 
