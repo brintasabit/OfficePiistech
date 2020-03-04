@@ -1,4 +1,4 @@
-﻿@model IEnumerable<EmployeeHBJS.Models.EmployeeInfo2>
+﻿@model IEnumerable<EmployeeHBJS.Models.EmployeeInfo5>
 @{
     ViewBag.Title = "Home Page";
 }
@@ -50,8 +50,11 @@
         <thead class="thead-dark">
             <tr>
                 <th>Employee Id</th>
-                <th>Name</th>
-                <th>E-Mail</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Salary Per Day</th>
+                <th>Weight</th>
+                <th>Age</th>
             </tr>
         </thead>
         <tbody id="TableSrch">
@@ -62,10 +65,19 @@
                         @Html.DisplayFor(modelItem => item.EmpId)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Name)
+                        @Html.DisplayFor(modelItem => item.FirstName)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Email)
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SalaryPerDay)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Weight)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Age)
                     </td>
                 </tr>
             }

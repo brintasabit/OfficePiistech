@@ -147,7 +147,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DBModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\EmployeeInfo2.cs">
+    <Compile Include="Models\EmployeeInfo5.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -184,10 +184,12 @@
       <DependentUpon>DBModel.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\handlebars-v4.7.3.js" />
     <Content Include="Scripts\handlebars.amd.js" />
     <Content Include="Scripts\handlebars.amd.min.js" />
     <Content Include="Scripts\handlebars.js" />
     <Content Include="Scripts\handlebars.min.js" />
+    <Content Include="Scripts\handlebars.runtime-v4.7.3.js" />
     <Content Include="Scripts\handlebars.runtime.amd.js" />
     <Content Include="Scripts\handlebars.runtime.amd.min.js" />
     <Content Include="Scripts\handlebars.runtime.js" />

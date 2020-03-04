@@ -25,6 +25,6 @@ namespace EmployeeHBJS.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<EmployeeInfo2> EmployeeInfo2 { get; set; }
+        public virtual DbSet<EmployeeInfo5> EmployeeInfo5 { get; set; }
     }
 }

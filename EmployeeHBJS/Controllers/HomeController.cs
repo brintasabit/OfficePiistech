@@ -14,12 +14,12 @@ namespace EmployeeHBJS.Controllers
             return View(GetAllEmployee());
         }
 
-        IEnumerable<EmployeeInfo2> GetAllEmployee()
+        IEnumerable<EmployeeInfo5> GetAllEmployee()
         {
             using (DBModel dB = new DBModel())
             {
-                var employeelist = dB.EmployeeInfo2.ToList<EmployeeInfo2>();
-                return employeelist;
+                var employeeList = dB.EmployeeInfo5.ToList<EmployeeInfo5>();
+                return employeeList;
             }
 
         }
@@ -30,9 +30,9 @@ namespace EmployeeHBJS.Controllers
         }
         public JsonResult HbJs()
         {
-            var employeeInfos = GetAllEmployee();
+            var employeeInfo5 = GetAllEmployee();
 
-            return Json(new {EmployeeInfoes= employeeInfos });
+            return Json(new {EmployeeInfo5 = employeeInfo5 });
         }
     }
 }

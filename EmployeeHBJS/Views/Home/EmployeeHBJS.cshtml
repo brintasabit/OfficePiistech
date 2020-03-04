@@ -17,64 +17,94 @@
         <thead id="empTb" class="empTb">
             <tr>
                 <td>Employee Id</td>
-                <td>Name</td>
-                <td>Email</td>
-                <td>Name&Email</td>
+                <td>First Name</td>
+                <td>LastName</td>
+                <td>Salary Per Day</td>
+                <td>Weight</td>
+                <td>Age</td>
+                <td>TotalSalary</td>
                 <td>Conditions</td>
+                <td>Loop</td>
             </tr>
         </thead>
-        <tbody>
-            
-            {{#EmployeeInfoes}}
-            <tr>
 
-                <td>{{EmpId}}</td>
-                <td>{{UpperCase Name}}</td>
-                <td>{{Email}}</td>
-                <td>{{Calculate Name Email}}</td>
-                {{#if Name "==" "Carlos-2"}}
-                <td>{{Name}}</td>
-                {{/if}}
-            </tr>
-            {{/EmployeeInfoes}}
-           
-        </tbody>
+        {{#EmployeeInfo5}}
+        
+    <tr>
+
+        <td>{{EmpId}}</td>
+        <td>{{FirstName}}</td>
+        <td>{{LastName}}</td>
+        <td>{{SalaryPerDay}}</td>
+        <td>{{Weight}}</td>
+        <td>{{Age}}</td>
+        <td>{{Calculate SalaryPerDay "10"}}</td>
+        <td>
+            {{#if FirstName LastName}}
+            {{/if}}
+        </td>
+        
+        <td>
+
+            {{#for}}
+            
+            {{/for}}
+
+        </td>
+        
+    </tr>
+        
+        {{/EmployeeInfo5}}
 
     </table>
         
     </script>
 
 
-<h2>Employee Infoes With HBJS</h2>
+<h2>Employees Info With Handlebar JS</h2>
 
 <script type="text/javascript">
-    console.log("function fired");
+    console.log("Script fired");
     Handlebars.registerHelper('UpperCase', function(aString) {
         console.log("UpperCase fired");
         return aString.toUpperCase();
     });
     Handlebars.registerHelper("Calculate", function (a, b) {
         console.log("Calculate fired");
-        var c = a + b;
+        var c = a * b;
         return c;
     });
-    Handlebars.registerHelper("if", function (a, b) {
+    Handlebars.registerHelper("if", function (a,b) {
         console.log("If fired");
-        if ( a == b ) {
-            return a+b;
+        var c;
+        if (a !== b) {
+            c = "Red";
         } else {
-            return a;
+            c = "Green";
         }
-        
+        return c;
     });
-
+    Handlebars.registerHelper("for", function () {
+        console.log("For fired");
+        var c;
+        for (c = 0; c < 5; c++) {
+            var b = cast;
+            
+        }
+        return b;
+    });
+    var cast = {
+        "Name": "John Hopkins",
+        "PetName": "Doe"
+    };
     $(function () {
-        
         var empTemplate = $("#hbTemplate").html();
         var sourceHtml = Handlebars.compile(empTemplate);
         $.post("/Home/HbJs", "", function (data) {
-        $("#hBDiv").html(sourceHtml(data));
-    }, "json");
+            $("#hBDiv").html(sourceHtml(data));
+            //$("#loop").html(sourceHtml(cast));
+        }, "json");
+
 });
 $.notify("Handlebar Js!", "success");
 </script>

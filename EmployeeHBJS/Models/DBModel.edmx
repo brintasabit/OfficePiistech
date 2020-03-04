@@ -5,32 +5,38 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="EmpHandleBarJs030320Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="EmployeeInfo2">
+        <EntityType Name="EmployeeInfo5">
           <Key>
             <PropertyRef Name="EmpId" />
           </Key>
           <Property Name="EmpId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="50" />
-          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" />
+          <Property Name="SalaryPerDay" Type="float" />
+          <Property Name="Weight" Type="float" />
+          <Property Name="Age" Type="int" />
         </EntityType>
         <EntityContainer Name="EmpHandleBarJs030320ModelStoreContainer">
-          <EntitySet Name="EmployeeInfo2" EntityType="Self.EmployeeInfo2" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeeInfo5" EntityType="Self.EmployeeInfo5" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="EmpHandleBarJs030320Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="EmployeeInfo2">
+        <EntityType Name="EmployeeInfo5">
           <Key>
             <PropertyRef Name="EmpId" />
           </Key>
           <Property Name="EmpId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SalaryPerDay" Type="Double" />
+          <Property Name="Weight" Type="Double" />
+          <Property Name="Age" Type="Int32" />
         </EntityType>
         <EntityContainer Name="DBModel" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="EmployeeInfo2" EntityType="Self.EmployeeInfo2" />
+          <EntitySet Name="EmployeeInfo5" EntityType="Self.EmployeeInfo5" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -38,12 +44,15 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="EmpHandleBarJs030320ModelStoreContainer" CdmEntityContainer="DBModel">
-          <EntitySetMapping Name="EmployeeInfo2">
-            <EntityTypeMapping TypeName="EmpHandleBarJs030320Model.EmployeeInfo2">
-              <MappingFragment StoreEntitySet="EmployeeInfo2">
+          <EntitySetMapping Name="EmployeeInfo5">
+            <EntityTypeMapping TypeName="EmpHandleBarJs030320Model.EmployeeInfo5">
+              <MappingFragment StoreEntitySet="EmployeeInfo5">
                 <ScalarProperty Name="EmpId" ColumnName="EmpId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="SalaryPerDay" ColumnName="SalaryPerDay" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
