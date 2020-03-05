@@ -15,6 +15,7 @@ BEGIN
    SET @count3 = @count3 + 1;
 END;
 
+Select * from EmployeeInfo
 Select * from EmployeeInfo5
 
 DECLARE @count INT;
@@ -22,7 +23,7 @@ SET @count = 1;
     
 WHILE @count<= 10
 BEGIN
-   INSERT INTO EmployeeInfo VALUES('Car-'+CAST(@count as varchar), @count*100)
+   INSERT INTO EmployeeInfo6 VALUES('Naomi'+CAST(@count as varchar),'naomi@hb.'+CAST(@count as varchar))
    SET @count = @count + 1;
 END;
 

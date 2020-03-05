@@ -19,6 +19,15 @@ namespace EmployeeHBJs050320.Controllers
             }
 
         }
+        IEnumerable<EmployeeInfo5> GetAllEmployee2()
+        {
+            using (DBModel dB = new DBModel())
+            {
+                var employeeList = dB.EmployeeInfo5.ToList<EmployeeInfo5>();
+                return employeeList;
+            }
+
+        }
 
         public ActionResult Hbjs()
         {
@@ -27,12 +36,12 @@ namespace EmployeeHBJs050320.Controllers
         public JsonResult HbJsController()
         {
             var employeeInfo6 = GetAllEmployee();
-            
+            var employeeInfo5 = GetAllEmployee2();
             var response =
                 new
                 {
                     EmployeeInfo = employeeInfo6,
-                    
+                    EmployeeInfo5 = employeeInfo5
                 };
 
             return Json(response, JsonRequestBehavior.AllowGet);

@@ -11,31 +11,45 @@
         <b>Employee Id</b>:{{EmpId}}<br />
         <b>Name</b>:{{Name}}<br />
         <b>E-mail</b>:{{Email}}<br />
-        <div>
-            {{>managers}}
-        </div>
+       <div>
+           <b>New Template</b>
+           {{>managers}}
+       </div>
     </div>
     {{/each}}
 
 </script>
 <script type="text/x-handlebars-template" id="partialTemplate">
+    
+    <table>
+        <tr>
+            <td>Employee Id</td>
+            <td>First Name</td>
+            <td>Last Name</td>
+            <td>Salary Per Day</td>
+            <td>Weight</td>
+            <td>Age</td>
+        </tr>
+        {{#EmployeeInfo5}}
+        <tr>
+            <td>{{EmpId}}</td>
+            <td>{{FirstName}}</td>
+            <td>{{LastName}}</td>
+            <td>{{SalaryPerDay}}</td>
+            <td>{{Weight}}</td>
+            <td>{{Age}}</td>
+        </tr>
+        {{/EmployeeInfo5}}
 
-<table>
-    <tr>
-        <td>Mallory..</td>
-        <td><b>A Malicious Attacker</b></td>
-
-    </tr>
-</table>
+    </table>
 
 </script>
 
 <script type="text/javascript">
-    $(function () {
+    $(function() {
         var empTemplate = $("#hbTemplate").html();
-        var empTemplate2 = $("#partialTemplate").html();
-        var sourceHtml = Handlebars.compile(empTemplate, empTemplate2);
-        Handlebars.registerPartial('managers', document.getElementById('partialTemplate').innerHTML);
+        var sourceHtml = Handlebars.compile(empTemplate);
+        Handlebars.registerPartial('managers', $("#partialTemplate").html());
         $.post("/First/HbJsController", "", function (data) {
             $("#handlebarDiv").html(sourceHtml(data));
         }, "json");
