@@ -18,43 +18,39 @@
             <tr>
                 <td>Employee Id</td>
                 <td>First Name</td>
-                <td>LastName</td>
+                <td>Last Name</td>
                 <td>Salary Per Day</td>
                 <td>Weight</td>
                 <td>Age</td>
-                <td>TotalSalary</td>
+                <td>Total Salary</td>
                 <td>Conditions</td>
                 <td>Loop</td>
             </tr>
         </thead>
 
-        {{#EmployeeInfo5}}
+        @*{{#EmployeeInfo5}}*@
         
-    <tr>
+        {{#each EmployeeInfo5}}
+        <tr>
 
-        <td>{{EmpId}}</td>
-        <td>{{FirstName}}</td>
-        <td>{{LastName}}</td>
-        <td>{{SalaryPerDay}}</td>
-        <td>{{Weight}}</td>
-        <td>{{Age}}</td>
-        <td>{{Calculate SalaryPerDay "10"}}</td>
-        <td>
-            {{#if FirstName LastName}}
-            {{/if}}
-        </td>
-        
-        <td>
+            <td>{{EmpId}}</td>
+            <td>{{FirstName}}</td>
+            <td>{{LastName}}</td>
+            <td>{{SalaryPerDay}}</td>
+            <td>{{Weight}}</td>
+            <td>{{Age}}</td>
+            <td>{{Calculate SalaryPerDay "10"}}</td>
+            <td>
+                {{#if FirstName LastName}}
+                {{/if}}
+            </td>
 
-            {{#for}}
-            
-            {{/for}}
+            <td></td>
 
-        </td>
+        </tr>
+        {{/each}}
         
-    </tr>
-        
-        {{/EmployeeInfo5}}
+        @*{{/EmployeeInfo5}}*@
 
     </table>
         
@@ -84,19 +80,21 @@
         }
         return c;
     });
+    var cast = (function () {
+        var b = "loop";
+
+    });
     Handlebars.registerHelper("for", function () {
         console.log("For fired");
+
         var c;
         for (c = 0; c < 5; c++) {
-            var b = cast;
+           cast();
             
         }
-        return b;
+        return cast();
     });
-    var cast = {
-        "Name": "John Hopkins",
-        "PetName": "Doe"
-    };
+    
     $(function () {
         var empTemplate = $("#hbTemplate").html();
         var sourceHtml = Handlebars.compile(empTemplate);
