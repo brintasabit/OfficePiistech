@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "Hbjs";
+}
+
+<title>Handlebar Js</title>
+<script type="text/x-handlebars-template" id="hbTemplate">
+
+    {{#each EmployeeInfo}}
+    <div class="handlebarDiv">
+        <b>Employee Id</b>:{{EmpId}}<br />
+        <b>Name</b>:{{Name}}<br />
+        <b>E-mail</b>:{{Email}}<br />
+        <div>
+            {{>managers}}
+        </div>
+    </div>
+    {{/each}}
+
+</script>
+<script type="text/x-handlebars-template" id="partialTemplate">
+
+<table>
+    <tr>
+        <td>Mallory..</td>
+        <td><b>A Malicious Attacker</b></td>
+
+    </tr>
+</table>
+
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        var empTemplate = $("#hbTemplate").html();
+        var empTemplate2 = $("#partialTemplate").html();
+        var sourceHtml = Handlebars.compile(empTemplate, empTemplate2);
+        Handlebars.registerPartial('managers', document.getElementById('partialTemplate').innerHTML);
+        $.post("/First/HbJsController", "", function (data) {
+            $("#handlebarDiv").html(sourceHtml(data));
+        }, "json");
+    });
+</script>
+<style>
+    .handlebarDiv {
+        display: block;
+        float: left;
+        padding: 5px;
+        margin: 5px;
+        border: 1px solid blueviolet;
+        border-radius: 10px;
+
+    }
+</style>
+<div id="handlebarDiv">
+
+</div>
