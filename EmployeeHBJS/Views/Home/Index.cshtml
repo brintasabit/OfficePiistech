@@ -1,7 +1,9 @@
-﻿@model IEnumerable<EmployeeHBJS.Models.EmployeeInfo5>
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<EmployeeHBJS.Models.EmployeeInfo5>
 @{
     ViewBag.Title = "Home Page";
 }
+
 <script>
     $("#Search").on("keyup", function () {
         var value = $(this).val().toLowerCase();
@@ -41,8 +43,10 @@
 <title>Employee</title>
 
 <h2>Employees Information</h2>
-<br/>
-<input class="form-control" type="text" placeholder="Search" aria-label="Search" id="Search"><br /><br />
+<br />
+<input class="form-control" type="text" placeholder="Search" aria-label="Search" id="Search">
+<br />
+<br />
 <div id="employeeData" class="employeeData">
 
 
@@ -83,6 +87,8 @@
             }
         </tbody>
     </table>
+    @Html.PagedListPager(Model, i => Url.Action("Index", "Home", new { i }))
+    
 </div>
 
 

@@ -1,15 +1,15 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "EmployeeHBJS";
 }
-
+@using PagedList.Mvc
+@model PagedList.IPagedList<EmployeeHBJS.Models.EmployeeInfo5>
 <style>
     #empTb.empTb {
         background: black;
         color: white;
         text-align: center;
     }
-</style>   
+</style>
 
 <script type="text/x-handlebars-template" id="hbTemplate">
 
@@ -29,7 +29,7 @@
         </thead>
 
         @*{{#EmployeeInfo5}}*@
-        
+
         {{#each EmployeeInfo5}}
         <tr>
 
@@ -44,24 +44,22 @@
                 {{#if FirstName LastName}}
                 {{/if}}
             </td>
-
-            <td></td>
-
         </tr>
+
         {{/each}}
-        
+
         @*{{/EmployeeInfo5}}*@
 
     </table>
-        
-    </script>
+
+</script>
 
 
 <h2>Employees Info With Handlebar JS</h2>
 
 <script type="text/javascript">
     console.log("Script fired");
-    Handlebars.registerHelper('UpperCase', function(aString) {
+    Handlebars.registerHelper('UpperCase', function (aString) {
         console.log("UpperCase fired");
         return aString.toUpperCase();
     });
@@ -70,7 +68,7 @@
         var c = a * b;
         return c;
     });
-    Handlebars.registerHelper("if", function (a,b) {
+    Handlebars.registerHelper("if", function (a, b) {
         console.log("If fired");
         var c;
         if (a !== b) {
@@ -89,22 +87,51 @@
 
         var c;
         for (c = 0; c < 5; c++) {
-           cast();
-            
+            cast();
+
         }
         return cast();
     });
-    
+
     $(function () {
+
         var empTemplate = $("#hbTemplate").html();
         var sourceHtml = Handlebars.compile(empTemplate);
-        $.post("/Home/HbJs", "", function (data) {
+        @*$.post("/Home/HbJs", "", function (data) {
             $("#hBDiv").html(sourceHtml(data));
+            @Html.PagedListPager(Model, i => Url.Action("EmployeeHBJS", "Home", new { i }));
             //$("#loop").html(sourceHtml(cast));
-        }, "json");
+        }, "json");*@
+        var requestData = {
+            EmpId: $('EmpId').val(),
+            FirstName: $('FirstName').val(),
+            LastName: $('LastName').val(),
+            SalaryPerDay: $('SalaryPerDay').val(),
+            Weight: $('Weight').val(),
+            Age: $('Age').val(),
+            pageNo: $('pageNo').val()
+        };
+        $.ajax({
+            url: '/Home/HbJs',
+            type: 'POST',
+            data: JSON.stringify(requestData),
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            error: function (xhr) {
+                alert('Error: ' + xhr.statusText);
+            },
+            success: function (data) {
+                ////$.notify("Successfull!", "success");
 
-});
-$.notify("Handlebar Js!", "success");
+                $("#hBDiv").html(sourceHtml(data));
+                console.log(data);
+
+            },
+            async: true,
+            processData: false
+        });
+    });
+    $.notify("Handlebar Js!", "success");
 </script>
 <div id="hBDiv">
 
