@@ -6,11 +6,14 @@
 }
 
 <script>
-    $("#Search").on("keyup", function () {
-        var value = $(this).val().toLowerCase();
-        $("#employeeTable *").filter(function () {
-            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-        });
+    $(document).ready(function() {
+        $("#Search").on("keyup",
+            function() {
+                var value = $(this).val().toLowerCase();
+                $("#TableSearch tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
     });
 </script>
 <style>
@@ -62,7 +65,7 @@
                 <th>Age</th>
             </tr>
         </thead>
-        <tbody id="TableSrch">
+        <tbody id="TableSearch">
             @foreach (var item in Model)
             {
                 <tr>
@@ -88,7 +91,7 @@
             }
         </tbody>
     </table>
-    @Html.PagedListPager(Model, i => Url.Action("Index", "Home", new { i }))
+    @Html.PagedListPager( Model, generatePageUrl: pageNo => Url.Action("Index", "Home", new { pageNo }))
 
 </div>
 

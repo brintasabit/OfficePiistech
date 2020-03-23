@@ -13,7 +13,10 @@
     }
 </style>
 
-<script type="text/x-handlebars-template" id="hbTemplate">
+<script type="text/x-handlebars-template" id="handlebarTemplate">
+    <br />
+    <input class="form-control" type="text" placeholder="Search" aria-label="Search" id="Search">
+    <br />
 
     <table class="table table-bordered">
         <thead id="empTb" class="empTb">
@@ -32,58 +35,29 @@
 
         @*{{#EmployeeInfo5}}*@
 
-        {{#each EmployeeInfo5}}
-        <tr>
+            {{#each EmployeeInfo5}}
+            <tbody id="myTable">
+                <tr>
 
-            <td>{{EmpId}}</td>
-            <td>{{FirstName}}</td>
-            <td>{{LastName}}</td>
-            <td>{{SalaryPerDay}}</td>
-            <td>{{Weight}}</td>
-            <td>{{Age}}</td>
-            <td>{{Calculate SalaryPerDay "10"}}</td>
-            <td>
-                {{#if FirstName LastName}}
-                {{/if}}
-            </td>
-        </tr>
-
-        {{/each}}
+                    <td>{{EmpId}}</td>
+                    <td>{{FirstName}}</td>
+                    <td>{{LastName}}</td>
+                    <td>{{SalaryPerDay}}</td>
+                    <td>{{Weight}}</td>
+                    <td>{{Age}}</td>
+                    <td>{{Calculate SalaryPerDay "10"}}</td>
+                    <td>
+                        {{#if FirstName LastName}}
+                        {{/if}}
+                    </td>
+                </tr>
+            </tbody>
+            {{/each}}
 
         @*{{/EmployeeInfo5}}*@
 
     </table>
-    <style>
-        .pagination {
-            display: inline-block;
-        }
 
-            .pagination a {
-                color: black;
-                float: left;
-                padding: 8px 16px;
-                text-decoration: none;
-                transition: background-color .3s;
-                border: 1px solid #ddd;
-                margin: 0 4px;
-            }
-
-                .pagination a.active {
-                    background-color: #4CAF50;
-                    color: white;
-                    border: 1px solid #4CAF50;
-                }
-
-                .pagination a:hover:not(.active) {
-                    background-color: #ddd;
-                }
-    </style>
-    <div class="pagination">
-        <button onclick="function()">Previous</button>
-        <button onclick="h(1)">1</button>
-        <button onclick="h(2)">2</button>
-        <button onclick="h(3)">Next</button>
-    </div>
 </script>
 
 
@@ -91,19 +65,29 @@
 
 <script type="text/javascript">
     console.log("Script fired");
+    $.notify("Handlebar Js!","success");
+    $(document).ready(function() {
+        $("#Search").on("keyup",
+            function() {
+                var value = $(this).val().toLowerCase();
+                $("#TableSearch tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+    });
     Handlebars.registerHelper('UpperCase',
-        function(aString) {
+        function (aString) {
             console.log("UpperCase fired");
             return aString.toUpperCase();
         });
     Handlebars.registerHelper("Calculate",
-        function(a, b) {
+        function (a, b) {
             console.log("Calculate fired");
             var c = a * b;
             return c;
         });
     Handlebars.registerHelper("if",
-        function(a, b) {
+        function (a, b) {
             console.log("If fired");
             var c;
             if (a !== b) {
@@ -113,12 +97,12 @@
             }
             return c;
         });
-    var cast = (function() {
+    var cast = (function () {
         var b = "loop";
 
     });
     Handlebars.registerHelper("for",
-        function() {
+        function () {
             console.log("For fired");
 
             var c;
@@ -133,41 +117,107 @@
     //    var c=PagedListPager(a,i=>)
     //    return cast();
     //});
-    $(function (pageNumber) {
-            var empTemplate = $("#hbTemplate").html();
-            var sourceHtml = Handlebars.compile(empTemplate);
-            var requestData = {
-                pageNo:pageNumber,
-                EmpId: $('EmpId').val(),
-                FirstName: $('FirstName').val(),
-                LastName: $('LastName').val(),
-                SalaryPerDay: $('SalaryPerDay').val(),
-                Weight: $('Weight').val(),
-                Age: $('Age').val()
-            
-            };
+    var requestData = {
+        pageNo: $('pageNo').val(),
+        EmpId: $('EmpId').val(),
+        FirstName: $('FirstName').val(),
+        LastName: $('LastName').val(),
+        SalaryPerDay: $('SalaryPerDay').val(),
+        Weight: $('Weight').val(),
+        Age: $('Age').val()
 
-       
-            $.ajax({
-                url: '/Home/HbJs?pageNo=' + pageNumber,
-                type: 'POST',
-                data: JSON.stringify(requestData),
-                dataType: 'json',
-                contentType: 'application/json; charset=utf-8',
-                error: function(xhr) {
-                    alert('Error: ' + xhr.statusText);
-                },
-                success: function(data) {
-                    $("#hBDiv").html(sourceHtml(data));
-                    console.log(pageNumber);
+    };
 
-                },
-                async: true,
-                processData: false
-            });
+    $(function () {
+        var template = $("#handlebarTemplate").html();
+        var sourceHtml = Handlebars.compile(template);
+        $.ajax({
+            url: '/Home/HbJs',
+            type: 'POST',
+            data: JSON.stringify(requestData),
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+
+                $("#handlebar").html(sourceHtml(data));
+                console.log(data);
+            },
+            error: function () {
+                alert("Error occured!");
+            }
         });
-    $.notify("Handlebar Js!", "success");
-</script>
-<div id="hBDiv">
+    });
 
+    var ajaxCall = function (pageNo) {
+        $.ajax({
+            url: '/Home/HbJs?pageNo=' + pageNo,
+            type: 'POST',
+            data: JSON.stringify(requestData),
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+
+                console.log("AJAX fired");
+                $(function () {
+                    var template = $("#handlebarTemplate").html();
+                    var sourceHtml = Handlebars.compile(template);
+
+                    
+
+
+                    $("#handlebar").html(sourceHtml(data));
+                });
+                //$("#handlebar").template(sourceHtml);
+                console.log(pageNo);
+
+            },
+            error: function () {
+                alert("Error occured!");
+            }
+        });
+    };
+
+</script>
+
+<div id="handlebar">
+
+</div>
+<style>
+    .pagination {
+        display: inline-block;
+    }
+
+        .pagination a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+            transition: background-color .3s;
+            border: 1px solid #ddd;
+            margin: 0 4px;
+        }
+
+            .pagination a.active {
+                background-color: #4CAF50;
+                color: white;
+                border: 1px solid #4CAF50;
+            }
+
+            .pagination a:hover:not(.active) {
+                background-color: #ddd;
+            }
+</style>
+<div class="pagination">
+    @*<button onclick="ajaxCall()">Previous</button>
+        <button onclick="ajaxCall(1)">1</button>
+        <button onclick="ajaxCall(2)">2</button>
+        <button onclick="ajaxCall(3)">Next</button>*@
+    <a onclick="ajaxCall()">&laquo;</a>
+    <a onclick="ajaxCall(1)">1</a>
+    <a onclick="ajaxCall(2)">2</a>
+    <a onclick="ajaxCall(3)"> 3</a>
+    <a onclick="ajaxCall(4)">4</a>
+    <a onclick="ajaxCall(5)">5</a>
+    <a onclick="ajaxCall(6)">6</a>
+    <a onclick="ajaxCall()">&raquo;</a>
 </div>

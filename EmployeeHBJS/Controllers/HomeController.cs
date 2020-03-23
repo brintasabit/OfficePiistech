@@ -13,16 +13,16 @@ namespace EmployeeHBJS.Controllers
     {
         public ActionResult Index(int ?pageNo)
         {
-            return View(GetAllEmployee(pageNo) as IPagedList<EmployeeInfo5>);
+            return View(GetAllEmployee(pageNo??1) as IPagedList<EmployeeInfo5>);
         }
 
-        IEnumerable<EmployeeInfo5> GetAllEmployee(int ?pageNo)
+        IEnumerable <EmployeeInfo5> GetAllEmployee(int ?pageNo)
         {
             using (DBModel dB = new DBModel())
             {
                 
                 var employeeList = dB.EmployeeInfo5.ToList<EmployeeInfo5>();
-                var e = employeeList.ToPagedList(pageNo??1,20);
+                var e = employeeList.ToPagedList(pageNo??1,5);
                 return e;
             }
 
