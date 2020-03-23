@@ -1,5 +1,6 @@
-﻿@using PagedList.Mvc
-@model PagedList.IPagedList<EmployeeHBJS.Models.EmployeeInfo5>
+﻿@using PagedList;
+@using PagedList.Mvc
+@model IPagedList<EmployeeHBJS.Models.EmployeeInfo5>
 @{
     ViewBag.Title = "Home Page";
 }
@@ -88,7 +89,7 @@
         </tbody>
     </table>
     @Html.PagedListPager(Model, i => Url.Action("Index", "Home", new { i }))
-    
+
 </div>
 
 

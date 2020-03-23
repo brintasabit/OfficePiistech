@@ -1,8 +1,10 @@
-﻿@{
+﻿@model PagedList.IPagedList<EmployeeHBJS.Models.EmployeeInfo5>
+@{
     ViewBag.Title = "EmployeeHBJS";
 }
+@using EmployeeHBJS.Controllers
 @using PagedList.Mvc
-@model PagedList.IPagedList<EmployeeHBJS.Models.EmployeeInfo5>
+
 <style>
     #empTb.empTb {
         background: black;
@@ -51,7 +53,37 @@
         @*{{/EmployeeInfo5}}*@
 
     </table>
+    <style>
+        .pagination {
+            display: inline-block;
+        }
 
+            .pagination a {
+                color: black;
+                float: left;
+                padding: 8px 16px;
+                text-decoration: none;
+                transition: background-color .3s;
+                border: 1px solid #ddd;
+                margin: 0 4px;
+            }
+
+                .pagination a.active {
+                    background-color: #4CAF50;
+                    color: white;
+                    border: 1px solid #4CAF50;
+                }
+
+                .pagination a:hover:not(.active) {
+                    background-color: #ddd;
+                }
+    </style>
+    <div class="pagination">
+        <button onclick="function()">Previous</button>
+        <button onclick="h(1)">1</button>
+        <button onclick="h(2)">2</button>
+        <button onclick="h(3)">Next</button>
+    </div>
 </script>
 
 
@@ -59,78 +91,81 @@
 
 <script type="text/javascript">
     console.log("Script fired");
-    Handlebars.registerHelper('UpperCase', function (aString) {
-        console.log("UpperCase fired");
-        return aString.toUpperCase();
-    });
-    Handlebars.registerHelper("Calculate", function (a, b) {
-        console.log("Calculate fired");
-        var c = a * b;
-        return c;
-    });
-    Handlebars.registerHelper("if", function (a, b) {
-        console.log("If fired");
-        var c;
-        if (a !== b) {
-            c = "Red";
-        } else {
-            c = "Green";
-        }
-        return c;
-    });
-    var cast = (function () {
+    Handlebars.registerHelper('UpperCase',
+        function(aString) {
+            console.log("UpperCase fired");
+            return aString.toUpperCase();
+        });
+    Handlebars.registerHelper("Calculate",
+        function(a, b) {
+            console.log("Calculate fired");
+            var c = a * b;
+            return c;
+        });
+    Handlebars.registerHelper("if",
+        function(a, b) {
+            console.log("If fired");
+            var c;
+            if (a !== b) {
+                c = "Red";
+            } else {
+                c = "Green";
+            }
+            return c;
+        });
+    var cast = (function() {
         var b = "loop";
 
     });
-    Handlebars.registerHelper("for", function () {
-        console.log("For fired");
+    Handlebars.registerHelper("for",
+        function() {
+            console.log("For fired");
 
-        var c;
-        for (c = 0; c < 5; c++) {
-            cast();
+            var c;
+            for (c = 0; c < 5; c++) {
+                cast();
 
-        }
-        return cast();
-    });
-
-    $(function () {
-
-        var empTemplate = $("#hbTemplate").html();
-        var sourceHtml = Handlebars.compile(empTemplate);
-        @*$.post("/Home/HbJs", "", function (data) {
-            $("#hBDiv").html(sourceHtml(data));
-            @Html.PagedListPager(Model, i => Url.Action("EmployeeHBJS", "Home", new { i }));
-            //$("#loop").html(sourceHtml(cast));
-        }, "json");*@
-        var requestData = {
-            EmpId: $('EmpId').val(),
-            FirstName: $('FirstName').val(),
-            LastName: $('LastName').val(),
-            SalaryPerDay: $('SalaryPerDay').val(),
-            Weight: $('Weight').val(),
-            Age: $('Age').val(),
-            pageNo: $('pageNo').val()
-        };
-        $.ajax({
-            url: '/Home/HbJs',
-            type: 'POST',
-            data: JSON.stringify(requestData),
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            error: function (xhr) {
-                alert('Error: ' + xhr.statusText);
-            },
-            success: function (data) {
-                ////$.notify("Successfull!", "success");
-
-                $("#hBDiv").html(sourceHtml(data));
-                console.log(data);
-
-            },
-            async: true,
-            processData: false
+            }
+            return cast();
         });
-    });
+    //Handlebars.registerHelper("paging", function (a) {
+    //    console.log("paging fired");
+    //    var c=PagedListPager(a,i=>)
+    //    return cast();
+    //});
+    $(function (pageNumber) {
+            var empTemplate = $("#hbTemplate").html();
+            var sourceHtml = Handlebars.compile(empTemplate);
+            var requestData = {
+                pageNo:pageNumber,
+                EmpId: $('EmpId').val(),
+                FirstName: $('FirstName').val(),
+                LastName: $('LastName').val(),
+                SalaryPerDay: $('SalaryPerDay').val(),
+                Weight: $('Weight').val(),
+                Age: $('Age').val()
+            
+            };
+
+       
+            $.ajax({
+                url: '/Home/HbJs?pageNo=' + pageNumber,
+                type: 'POST',
+                data: JSON.stringify(requestData),
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                error: function(xhr) {
+                    alert('Error: ' + xhr.statusText);
+                },
+                success: function(data) {
+                    $("#hBDiv").html(sourceHtml(data));
+                    console.log(pageNumber);
+
+                },
+                async: true,
+                processData: false
+            });
+        });
     $.notify("Handlebar Js!", "success");
 </script>
 <div id="hBDiv">
