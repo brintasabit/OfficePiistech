@@ -8,7 +8,7 @@ namespace LinqTestEmployee.Controllers
 {
     public class LinqController : Controller
     {
-        EmployeeInfoDataContext employeeInfoDataContext=new EmployeeInfoDataContext();
+        EmployeeInfoDataContext employeeInfoDataContext = new EmployeeInfoDataContext();
         IEnumerable <EmployeeInfo> Data(int pageNo)
         {
             var numberOfData=10;

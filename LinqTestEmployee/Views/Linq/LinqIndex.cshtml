@@ -28,10 +28,8 @@
         {{/EmployeeInfo}}
     </table>
     <div class="pagination">
-        
-        
 
-@for (int i = 1; i <=6; i++)
+        @for (int i = 1; i <= 6; i++)
         {
             //6 will be value of totalPage from ajax call 1
             <a onclick="ajaxPageCall(@i)">@i</a>
