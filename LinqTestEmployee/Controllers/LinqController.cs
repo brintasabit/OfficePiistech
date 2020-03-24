@@ -8,12 +8,19 @@ namespace LinqTestEmployee.Controllers
 {
     public class LinqController : Controller
     {
+        EmployeeInfoDataContext employeeInfoDataContext=new EmployeeInfoDataContext();
         IEnumerable <EmployeeInfo> Data(int pageNo)
         {
-            EmployeeInfoDataContext employeeInfoDataContext=new EmployeeInfoDataContext();
+            var numberOfData=10;
             var emp = from x in employeeInfoDataContext.EmployeeInfos select x;
-            var index = emp.Skip((pageNo - 1) * 6).Take(6);
-            return index;
+            var fetchedData = emp.Count();
+            if (fetchedData <= 100)
+            {
+                numberOfData = Convert.ToInt32((fetchedData / 6) + 1);
+            }
+            var indexData = emp.Skip((pageNo - 1) * numberOfData).Take(numberOfData);
+            return indexData;
+            
         }
         public ActionResult LinqIndex()
         {
@@ -22,11 +29,25 @@ namespace LinqTestEmployee.Controllers
 
         public JsonResult LinqJson(int ?pageNo)
         {
+            var emp = from x in employeeInfoDataContext.EmployeeInfos select x;
+            var fetchedDataCount = emp.Count();
+            var numberOfData=10;
+            if (fetchedDataCount <= 100)
+            {
+                numberOfData = Convert.ToInt32((fetchedDataCount / 6) + 1);
+            }
+
+            var employeeInfo = Data(pageNo ?? 1);
+                var emp2 = new
+                {
+                    EmployeeInfo = employeeInfo,
+                    fetchedData = fetchedDataCount,
+                    numData = numberOfData
+                };
+                
             
-            var employeeInfo = Data(pageNo??1);
-            var emp = new {EmployeeInfo = employeeInfo};
+            return Json(emp2);
             
-            return Json(emp);
         }
     }
 }

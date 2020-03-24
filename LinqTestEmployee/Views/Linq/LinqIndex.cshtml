@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "LinqIndex";
 }
 
@@ -29,11 +28,20 @@
         {{/EmployeeInfo}}
     </table>
 
+    <div class="pagination">
+        @for (int i = 1; i <= 6; i++)
+        {
+            //6 will be value of totalPage from ajax call 1
+            <a onclick="ajaxPageCall(@i)">@i</a>
+        }
 
+    </div>
 </script>
 
 <script type="text/javascript">
     var requestData = {
+        numberOfData: $('numberOfData').val(),
+        fetchedDataCount: $('fetchedDataCount').val(),
         EmployeeId: $('EmployeeId').val(),
         Name: $('Name').val(),
         Email: $('Email').val(),
@@ -41,16 +49,18 @@
         Salary: $('Salary').val()
     };
     $(function () {
-       $.ajax({
+        $.ajax({
             url: '/Linq/LinqJson',
             type: 'POST',
             data: JSON.stringify(requestData),
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                
-                console.log("AJAX Call");
+                console.log("AJAX Call 1");
                 console.log("DOM loaded");
+                console.log(data.numData);
+                var totalPage = parseInt((data.fetchedData / data.numData)+1);
+                console.log(totalPage);
                 var template = $("#handlebarTemplate").html();
                 var sourceHtml = Handlebars.compile(template);
                 $("#handlebar").html(sourceHtml(data));
@@ -60,6 +70,7 @@
             }
         });
     });
+    
     var ajaxPageCall = function (pageNo) {
         $.ajax({
             url: '/Linq/LinqJson?pageNo=' + pageNo,
@@ -78,7 +89,7 @@
             }
         });
     };
-    $.notify("Linq Successful","success");
+    $.notify("LinQ Successful", "success");
 </script>
 <style>
     #LinqThead.LinqThead {
@@ -86,41 +97,31 @@
         color: white;
         text-align: center;
     }
+
     .pagination {
         display: inline-block;
     }
 
-    .pagination a {
-        color: black;
-        float: left;
-        padding: 8px 16px;
-        text-decoration: none;
-        transition: background-color .3s;
-        border: 1px solid #ddd;
-        margin: 0 4px;
-    }
+        .pagination a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+            transition: background-color .3s;
+            border: 1px solid #ddd;
+            margin: 0 4px;
+        }
 
-    .pagination a.active {
-        background-color: #4CAF50;
-        color: white;
-        border: 1px solid #4CAF50;
-    }
+            .pagination a.active {
+                background-color: #4CAF50;
+                color: white;
+                border: 1px solid #4CAF50;
+            }
 
-    .pagination a:hover:not(.active) {
-        background-color: #ddd;
-    }
+            .pagination a:hover:not(.active) {
+                background-color: #ddd;
+            }
 </style>
 <div id="handlebar">
 
-</div>
-<div class="pagination">
-    <a onclick="ajaxPageCall()">&laquo;</a>
-    <a onclick="ajaxPageCall(1)">1</a>
-    <a onclick="ajaxPageCall(2)">2</a>
-    <a onclick="ajaxPageCall(3)"> 3</a>
-    <a onclick="ajaxPageCall(4)">4</a>
-    <a onclick="ajaxPageCall(5)">5</a>
-    <a onclick="ajaxPageCall(6)">6</a>
-    <a onclick="ajaxPageCall(7)">7</a>
-    <a onclick="ajaxPageCall()">&raquo;</a>
 </div>
