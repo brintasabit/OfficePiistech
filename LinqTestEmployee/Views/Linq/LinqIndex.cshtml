@@ -27,27 +27,30 @@
         </tbody>
         {{/EmployeeInfo}}
     </table>
-
     <div class="pagination">
-        @for (int i = 1; i <= 6; i++)
+        
+        
+
+@for (int i = 1; i <=6; i++)
         {
             //6 will be value of totalPage from ajax call 1
             <a onclick="ajaxPageCall(@i)">@i</a>
         }
 
     </div>
+
 </script>
 
 <script type="text/javascript">
     var requestData = {
-        numberOfData: $('numberOfData').val(),
-        fetchedDataCount: $('fetchedDataCount').val(),
+        totalPage: $('totalPage').val(),
         EmployeeId: $('EmployeeId').val(),
         Name: $('Name').val(),
         Email: $('Email').val(),
         Age: $('Age').val(),
         Salary: $('Salary').val()
     };
+
     $(function () {
         $.ajax({
             url: '/Linq/LinqJson',
@@ -58,19 +61,17 @@
             success: function (data) {
                 console.log("AJAX Call 1");
                 console.log("DOM loaded");
-                console.log(data.numData);
-                var totalPage = parseInt((data.fetchedData / data.numData)+1);
-                console.log(totalPage);
                 var template = $("#handlebarTemplate").html();
                 var sourceHtml = Handlebars.compile(template);
                 $("#handlebar").html(sourceHtml(data));
+                console.log(data.totalPg);
             },
             error: function () {
                 alert("Error occured!");
             }
         });
     });
-    
+
     var ajaxPageCall = function (pageNo) {
         $.ajax({
             url: '/Linq/LinqJson?pageNo=' + pageNo,

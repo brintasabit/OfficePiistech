@@ -22,6 +22,7 @@ namespace LinqTestEmployee.Controllers
             return indexData;
             
         }
+
         public ActionResult LinqIndex()
         {
             return View();
@@ -37,12 +38,12 @@ namespace LinqTestEmployee.Controllers
                 numberOfData = Convert.ToInt32((fetchedDataCount / 6) + 1);
             }
 
+            var totalPage = Convert.ToInt32((fetchedDataCount / numberOfData) + 1);
             var employeeInfo = Data(pageNo ?? 1);
                 var emp2 = new
                 {
                     EmployeeInfo = employeeInfo,
-                    fetchedData = fetchedDataCount,
-                    numData = numberOfData
+                    totalPg = totalPage
                 };
                 
             
