@@ -4,11 +4,11 @@ DECLARE @count2 INT;
 SET @count = 1;
 SET @count1 = 21;
 SET @count2 = 20000;
-WHILE @count<= 35
+WHILE @count<= 100
 BEGIN
-   INSERT INTO EmployeeInfo VALUES(
-								'Naomi'+CAST(@count as varchar),
-								'naomi@go.'+CAST(@count as varchar),
+   INSERT INTO EmployeeInfo2 VALUES(
+								'Gorgie'+CAST(@count as varchar),
+								'gorgie@go.'+CAST(@count as varchar),
 								 CAST(@count1 as varchar),
 								 CAST(@count2 as varchar)
 								)
