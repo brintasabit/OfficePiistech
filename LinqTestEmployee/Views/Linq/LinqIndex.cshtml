@@ -6,7 +6,13 @@
 <h2>Linq Index</h2>
 
 <script type="text/x-handlebars-template" id="handlebarTemplate">
-
+    <div class="pagination">
+        <a onclick=ajaxPageCallPrevious({{page}})><<</a>
+        {{#forTotalPage 5}}
+        <a onclick=ajaxPageCall({{this}})>{{this}}</a>
+        {{/forTotalPage}}
+        <a onclick=ajaxPageCallNext({{page}})>>></a>
+    </div>
     <table class="table table-bordered">
         <thead class="LinqThead" id="LinqThead">
             <tr>
@@ -31,17 +37,16 @@
         {{/EmployeeInfo}}
     </table>
     <div class="pagination">
-        <a onclick=ajaxPageCall("{{this}}")>Previous</a>
+        <a onclick=ajaxPageCallPrevious({{page}})><<</a>
+        <a onclick=ajaxPageCallNext({{page}})>>></a>
         {{#forTotalPage totalPage}}
-        <a onclick=ajaxPageCall("{{this}}")>{{this}}</a>
+        <a onclick=ajaxPageCall({{this}})>{{this}}</a>
         {{/forTotalPage}}
-
     </div>
-    
+
 </script>
 <script type="text/javascript">
     var requestData = {
-        pageNo: $('pageNo').val(),
         EmployeeId: $('EmployeeId').val(),
         Name: $('Name').val(),
         Email: $('Email').val(),
@@ -65,7 +70,7 @@
                 console.log("Total Number Of Data: ",data.fetchData);
                 console.log("Total Number Of Data On This Page: ",data.numberOfDataPerPage);
                 console.log("Total Index: ",data.totalPage);
-                console.log("Current Index: ",data.pageNo);
+                console.log("Current Index: ",data.page);
             },
             error: function () {
                 alert("Error occured!");
@@ -88,7 +93,53 @@
                 console.log("Total Number Of Data: ",data.fetchData);
                 console.log("Total Number Of Data On This Page: ",data.numberOfDataPerPage);
                 console.log("Total Index: ",data.totalPage);
-                console.log("Current Index: ",pageNo);
+                console.log("Current Index: ",data.page);
+            },
+            error: function () {
+                alert("Error occured!");
+            }
+        });
+    };
+    var ajaxPageCallPrevious = function (pageNo) {
+        var prePage = pageNo - 1;
+        $.ajax({
+            url: '/Linq/LinqJson?pageNo=' + prePage,
+            type: 'POST',
+            data: JSON.stringify(requestData),
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                console.log("AJAX Call 3 Previous");
+                var template = $("#handlebarTemplate").html();
+                var sourceHtml = Handlebars.compile(template);
+                $("#handlebar").html(sourceHtml(data));
+                console.log("Total Number Of Data: ",data.fetchData);
+                console.log("Total Number Of Data On This Page: ",data.numberOfDataPerPage);
+                console.log("Total Index: ",data.totalPage);
+                console.log("Current Index: ",prePage);
+            },
+            error: function () {
+                alert("Error occured!");
+            }
+        });
+    };
+    var ajaxPageCallNext = function (pageNo) {
+        var nextPage = pageNo + 1;
+        $.ajax({
+            url: '/Linq/LinqJson?pageNo=' + nextPage,
+            type: 'POST',
+            data: JSON.stringify(requestData),
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                console.log("AJAX Call 4 Next");
+                var template = $("#handlebarTemplate").html();
+                var sourceHtml = Handlebars.compile(template);
+                $("#handlebar").html(sourceHtml(data));
+                console.log("Total Number Of Data: ",data.fetchData);
+                console.log("Total Number Of Data On This Page: ",data.numberOfDataPerPage);
+                console.log("Total Index: ",data.totalPage);
+                console.log("Current Index: ",nextPage);
             },
             error: function () {
                 alert("Error occured!");
@@ -102,7 +153,6 @@
             totalLoop += block.fn(i);
         return totalLoop;
     });
-
 </script>
 
 <style>
