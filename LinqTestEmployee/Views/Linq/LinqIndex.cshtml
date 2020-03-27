@@ -3,17 +3,26 @@
     ViewBag.Title = "LinqIndex";
 }
 
-<h2>Linq Index</h2>
-
+<h2>Linq Experiment</h2>
+<p>Linq & Handlebar with AJAX</p>
 <script type="text/x-handlebars-template" id="handlebarTemplate">
+
     <div class="pagination">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Go to page no" aria-label="Recipient's username" aria-describedby="basic-addon2" id="pg" onkeyup=ajaxPageCall($("#pg").val())>
+        </div>
         <a onclick=ajaxPageCallPrevious({{page}})><<</a>
         {{#forTotalPage 5}}
         <a onclick=ajaxPageCall({{this}})>{{this}}</a>
         {{/forTotalPage}}
+        <a onclick=ajaxPageCall({{prePage}})>{{ifPreviousPage prePage}}</a>
         <a onclick=ajaxPageCallNext({{page}})>>></a>
+        <a onclick=ajaxPageCall({{nextPage}})>{{ifNext nextPage}}</a>
+        <a onclick=ajaxPageCall({{totalPage}})>Last Page</a>
+
     </div>
-    <table class="table table-bordered">
+    <p>Showing Page: {{page}} Out Of {{totalPage}}</p></br>
+    <table class="table table-bordered" id="tId">
         <thead class="LinqThead" id="LinqThead">
             <tr>
                 <td>Employee Id</td>
@@ -42,7 +51,10 @@
         {{#forTotalPage totalPage}}
         <a onclick=ajaxPageCall({{this}})>{{this}}</a>
         {{/forTotalPage}}
+
     </div>
+
+
 
 </script>
 <script type="text/javascript">
@@ -56,7 +68,7 @@
 
     $(function () {
         $.ajax({
-            url: '/Linq/LinqJson',
+            url: '/Linq/LinqJson?pageNo=' + 1,
             type: 'POST',
             data: JSON.stringify(requestData),
             dataType: 'json',
@@ -67,10 +79,11 @@
                 var template = $("#handlebarTemplate").html();
                 var sourceHtml = Handlebars.compile(template);
                 $("#handlebar").html(sourceHtml(data));
-                console.log("Total Number Of Data: ",data.fetchData);
-                console.log("Total Number Of Data On This Page: ",data.numberOfDataPerPage);
-                console.log("Total Index: ",data.totalPage);
-                console.log("Current Index: ",data.page);
+                console.log("Total Number Of Data: ", data.fetchData);
+                var d = ($("#tId tr").length) - 1;
+                console.log("Total Number Of Data On This Page: ", d);
+                console.log("Total Index: ", data.totalPage);
+                console.log("Current Index: ", data.page);
             },
             error: function () {
                 alert("Error occured!");
@@ -79,6 +92,7 @@
     });
 
     var ajaxPageCall = function (pageNo) {
+
         $.ajax({
             url: '/Linq/LinqJson?pageNo=' + pageNo,
             type: 'POST',
@@ -90,38 +104,56 @@
                 var template = $("#handlebarTemplate").html();
                 var sourceHtml = Handlebars.compile(template);
                 $("#handlebar").html(sourceHtml(data));
-                console.log("Total Number Of Data: ",data.fetchData);
-                console.log("Total Number Of Data On This Page: ",data.numberOfDataPerPage);
-                console.log("Total Index: ",data.totalPage);
-                console.log("Current Index: ",data.page);
+                var d = ($("#tId tr").length) - 1;
+                if (d === 0) {
+                    alert("No Data! Showing Last Page");
+                    console.log("Ajax Call 5");
+                    ajaxPageCall(data.totalPage);
+                } else {
+                    console.log("Total Number Of Data: ", data.fetchData);
+                    console.log("Total Number Of Data On This Page: ", d);
+                    console.log("Total Index: ", data.totalPage);
+                    console.log("Current Index: ", data.page);
+                    console.log("Previous Index: ", data.prePage);
+                }
+
             },
             error: function () {
                 alert("Error occured!");
             }
         });
+
+
     };
     var ajaxPageCallPrevious = function (pageNo) {
         var prePage = pageNo - 1;
-        $.ajax({
-            url: '/Linq/LinqJson?pageNo=' + prePage,
-            type: 'POST',
-            data: JSON.stringify(requestData),
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                console.log("AJAX Call 3 Previous");
-                var template = $("#handlebarTemplate").html();
-                var sourceHtml = Handlebars.compile(template);
-                $("#handlebar").html(sourceHtml(data));
-                console.log("Total Number Of Data: ",data.fetchData);
-                console.log("Total Number Of Data On This Page: ",data.numberOfDataPerPage);
-                console.log("Total Index: ",data.totalPage);
-                console.log("Current Index: ",prePage);
-            },
-            error: function () {
-                alert("Error occured!");
-            }
-        });
+        if (prePage === 0) {
+            alert("This Is Start Page!");
+        } else {
+            $.ajax({
+                url: '/Linq/LinqJson?pageNo=' + prePage,
+                type: 'POST',
+                data: JSON.stringify(requestData),
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    console.log("AJAX Call 3 Previous");
+                    console.log(data);
+                    var template = $("#handlebarTemplate").html();
+                    var sourceHtml = Handlebars.compile(template);
+                    $("#handlebar").html(sourceHtml(data));
+                    console.log("Total Number Of Data: ", data.fetchData);
+                    var d = ($("#tId tr").length) - 1;
+                    console.log("Total Number Of Data On This Page: ", d);
+                    console.log("Total Index: ", data.totalPage);
+                    console.log("Current Index: ", prePage);
+                },
+                error: function () {
+                    alert("Error occured!");
+                }
+            });
+        }
+
     };
     var ajaxPageCallNext = function (pageNo) {
         var nextPage = pageNo + 1;
@@ -136,10 +168,17 @@
                 var template = $("#handlebarTemplate").html();
                 var sourceHtml = Handlebars.compile(template);
                 $("#handlebar").html(sourceHtml(data));
-                console.log("Total Number Of Data: ",data.fetchData);
-                console.log("Total Number Of Data On This Page: ",data.numberOfDataPerPage);
-                console.log("Total Index: ",data.totalPage);
-                console.log("Current Index: ",nextPage);
+
+                var d = ($("#tId tr").length) - 1;
+                if (d === 0) {
+                    alert("End Of Pages! Showing Last Page!");
+                    ajaxPageCallPrevious(nextPage);
+                } else {
+                    console.log("Total Number Of Data: ", data.fetchData);
+                    console.log("Total Number Of Data On This Page: ", d);
+                    console.log("Total Index: ", data.totalPage);
+                    console.log("Current Index: ", nextPage);
+                }
             },
             error: function () {
                 alert("Error occured!");
@@ -147,11 +186,36 @@
         });
     };
     $.notify("LinQ Successful", "success");
-    Handlebars.registerHelper('forTotalPage', function(n, block) {
+    Handlebars.registerHelper('forTotalPage', function (n, block) {
         var totalLoop = '';
-        for(var i = 1; i <= n; i++)
+        for (var i = 1; i <= n; i++)
             totalLoop += block.fn(i);
         return totalLoop;
+    });
+    Handlebars.registerHelper('ifPreviousPage', function (a) {
+        if (a === 0) {
+            var b = 6;
+            return b;
+        }
+
+        else
+            return a;
+    });
+    Handlebars.registerHelper('ifNext', function (a) {
+        if (a === 1)
+            return 7;
+        else if (a === 2)
+            return 7;
+        else if (a === 3)
+            return 7;
+        else if (a === 4)
+            return 7;
+        else if (a === 5)
+            return 7;
+        else if (a === 6)
+            return 7;
+        else
+            return a;
     });
 </script>
 
@@ -184,7 +248,7 @@
             }
 
             .pagination a:hover:not(.active) {
-                background-color: 	#32CD32;
+                background-color: #32CD32;
             }
 </style>
 <div id="handlebar">

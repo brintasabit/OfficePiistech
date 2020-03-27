@@ -17,4 +17,4 @@ BEGIN
    SET @count2 = @count2 + 1;
 END;
 
-select * from EmployeeInfo
+select * from EmployeeInfo2
