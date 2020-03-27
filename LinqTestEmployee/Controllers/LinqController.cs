@@ -13,7 +13,7 @@ namespace LinqTestEmployee.Controllers
         {
             var emp = from x in employeeInfoDataContext.EmployeeInfos select x;
             var fetchedDataCount = emp.Count();
-            var numberOfData = fetchedDataCount <= 51 ? Convert.ToInt32((fetchedDataCount / 1000)) : 100;
+            var numberOfData = fetchedDataCount >= 200000 ? Convert.ToInt32((fetchedDataCount / 1000)) : 100;
             //var totalPageCount = Convert.ToInt32((fetchedDataCount / numberOfData));
             var index = emp.Skip((pageNo - 1) * numberOfData).Take(numberOfData);
             return index;
@@ -26,7 +26,7 @@ namespace LinqTestEmployee.Controllers
         {
             var emp = from x in employeeInfoDataContext.EmployeeInfos select x;
             var fetchedDataCount = emp.Count();
-            var numberOfData = fetchedDataCount <= 51 ? Convert.ToInt32((fetchedDataCount / 1000)) : 100;
+            var numberOfData = fetchedDataCount >= 200000 ? Convert.ToInt32((fetchedDataCount / 1000)) : 100;
             var totalPageCount = Convert.ToInt32((fetchedDataCount / numberOfData) + 1);
             var indexData = Data(pageNo ?? 1);
             var empData = new
