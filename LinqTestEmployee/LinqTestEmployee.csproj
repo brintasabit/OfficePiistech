@@ -175,6 +175,7 @@
     <None Include="EmployeeInfo2.dbml.layout">
       <DependentUpon>EmployeeInfo2.dbml</DependentUpon>
     </None>
+    <None Include="Properties\PublishProfiles\newweb.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\handlebars.amd.js" />
     <Content Include="Scripts\handlebars.amd.min.js" />
